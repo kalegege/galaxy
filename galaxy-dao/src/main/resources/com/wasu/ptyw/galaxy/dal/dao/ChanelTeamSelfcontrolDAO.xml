@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.ChanelTeamSelfcontrolDAO">
+    <resultMap type="ChanelTeamSelfcontrolDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="ch_id" property="chId" javaType="java.lang.String" />
+		<result column="ch_no" property="chNo" javaType="java.lang.Integer" />
+		<result column="ch_name" property="chName" javaType="java.lang.String" />
+		<result column="ch_picture" property="chPicture" javaType="java.lang.String" />
+		<result column="ch_image" property="chImage" javaType="java.lang.String" />
+		<result column="ch_status" property="chStatus" javaType="java.lang.Integer" />
+		<result column="ch_weight" property="chWeight" javaType="java.lang.Integer" />
+		<result column="ch_alias" property="chAlias" javaType="java.lang.String" />
+		<result column="region_id" property="regionId" javaType="java.lang.String" />
+		<result column="gmt_create" property="gmtCreate" javaType="java.util.Date" />
+		<result column="gmt_modified" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	ch_id,	ch_no,	ch_name,	ch_picture,	ch_image,ch_status,	ch_weight,	ch_alias,	region_id,	gmt_create,	gmt_modified
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="chId != null">
+		        and ch_id = #{chId} 
+		    </if> 
+		    <if test="chNo != null">
+		        and ch_no = #{chNo} 
+		    </if> 
+		    <if test="chName != null">
+		        and ch_name = #{chName} 
+		    </if> 
+		    <if test="chPicture != null">
+		        and ch_picture = #{chPicture} 
+		    </if> 
+		    <if test="chImage != null">
+		        and ch_image = #{chImage} 
+		    </if> 
+		    <if test="chStatus != null">
+		        and ch_status = #{chStatus} 
+		    </if> 
+		    <if test="chWeight != null">
+		        and ch_weight = #{chWeight} 
+		    </if> 
+		    <if test="chAlias != null">
+		        and ch_alias = #{chAlias} 
+		    </if> 
+		    <if test="regionId != null">
+		        and region_id = #{regionId} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="ChanelTeamSelfcontrolDO" useGeneratedKeys="true" keyProperty="id">
+        insert into chanel_team_selfcontrol (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="chId != null">
+		   ch_id,
+		</if>
+		<if test="chNo != null">
+		   ch_no,
+		</if>
+		<if test="chName != null">
+		   ch_name,
+		</if>
+		<if test="chPicture != null">
+		   ch_picture,
+		</if>
+		<if test="chImage != null">
+		   ch_image,
+		</if>
+		<if test="chStatus != null">
+		   ch_status,
+		</if>
+		<if test="chWeight != null">
+		   ch_weight,
+		</if>
+		<if test="chAlias != null">
+		   ch_alias,
+		</if>
+		<if test="regionId != null">
+		   region_id,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="chId != null">
+	       #{chId},
+	    </if>
+		<if test="chNo != null">
+	       #{chNo},
+	    </if>
+		<if test="chName != null">
+	       #{chName},
+	    </if>
+		<if test="chPicture != null">
+	       #{chPicture},
+	    </if>
+	    <if test="chImage != null">
+	       #{chImage},
+	    </if>
+		<if test="chStatus != null">
+	       #{chStatus},
+	    </if>
+		<if test="chWeight != null">
+	       #{chWeight},
+	    </if>
+		<if test="chAlias != null">
+	       #{chAlias},
+	    </if>
+		<if test="regionId != null">
+	       #{regionId},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="ChanelTeamSelfcontrolDO">
+        update chanel_team_selfcontrol
+        <trim prefix="set">
+		    <if test="chId != null">
+		        ch_id = #{chId},
+		    </if> 
+		    <if test="chNo != null">
+		        ch_no = #{chNo},
+		    </if> 
+		    <if test="chName != null">
+		        ch_name = #{chName},
+		    </if> 
+		    <if test="chPicture != null">
+		        ch_picture = #{chPicture},
+		    </if>
+		    <if test="chImage != null">
+		        ch_image = #{chImage},
+		    </if> 
+		    <if test="chStatus != null">
+		        ch_status = #{chStatus},
+		    </if> 
+		    <if test="chWeight != null">
+		        ch_weight = #{chWeight},
+		    </if> 
+		    <if test="chAlias != null">
+		        ch_alias = #{chAlias},
+		    </if> 
+		    <if test="regionId != null">
+		        region_id = #{regionId},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from chanel_team_selfcontrol
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_team_selfcontrol
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_team_selfcontrol
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="ChanelTeamSelfcontrolQuery">
+		select count(*) from chanel_team_selfcontrol
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="ChanelTeamSelfcontrolQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team_selfcontrol
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+    <select id="getrecommend" resultMap="BaseResultMap" parameterType="ChanelTeamRecommendQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team_selfcontrol where ch_status = '1' and region_id = #{regionId} order by ch_weight
+	</select>
+</mapper>

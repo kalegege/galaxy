@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyDiscountDAO">
+    <resultMap type="GalaxyDiscountDO" id="BaseResultMap">
+		<result column="ID" property="id" javaType="java.lang.Long" />
+		<result column="region_code" property="regionCode" javaType="java.lang.String" />
+		<result column="name" property="name" javaType="java.lang.String" />
+		<result column="price" property="price" javaType="java.lang.Integer" />
+		<result column="percent" property="percent" javaType="java.lang.Integer" />
+		<result column="pic" property="pic" javaType="java.lang.String" />
+		<result column="des" property="des" javaType="java.lang.String" />
+		<result column="priority" property="priority" javaType="java.lang.Integer" />
+		<result column="rate" property="rate" javaType="java.lang.Integer" />
+		<result column="count" property="count" javaType="java.lang.Integer" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	ID,	region_code,	name,	price,	percent,	pic,	des,	priority,	rate,	count,	status,	GMT_CREATE,	GMT_MODIFIED
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if> 
+		    <if test="name != null">
+		        and name = #{name} 
+		    </if> 
+		    <if test="likeName != null">
+		        and name like CONCAT('%','${likeName}','%' )
+		    </if> 
+		    <if test="price != null">
+		        and price = #{price} 
+		    </if> 
+		    <if test="percent != null">
+		        and percent = #{percent} 
+		    </if> 
+		    <if test="pic != null">
+		        and pic = #{pic} 
+		    </if> 
+		    <if test="des != null">
+		        and des = #{des} 
+		    </if> 
+		    <if test="priority != null">
+		        and priority = #{priority} 
+		    </if> 
+		    <if test="rate != null">
+		        and rate = #{rate} 
+		    </if> 
+		    <if test="count != null">
+		        and count = #{count} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="GalaxyDiscountDO" useGeneratedKeys="true" keyProperty="id">
+        insert into galaxy_discount (
+		<if test="id != null">
+		   ID,
+		</if>
+		<if test="regionCode != null">
+		   region_code,
+		</if>
+		<if test="name != null">
+		   name,
+		</if>
+		<if test="price != null">
+		   price,
+		</if>
+		<if test="percent != null">
+		   percent,
+		</if>
+		<if test="pic != null">
+		   pic,
+		</if>
+		<if test="des != null">
+		   des,
+		</if>
+		<if test="priority != null">
+		   priority,
+		</if>
+		<if test="rate != null">
+		   rate,
+		</if>
+		<if test="count != null">
+		   count,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="regionCode != null">
+	       #{regionCode},
+	    </if>
+		<if test="name != null">
+	       #{name},
+	    </if>
+		<if test="price != null">
+	       #{price},
+	    </if>
+		<if test="percent != null">
+	       #{percent},
+	    </if>
+		<if test="pic != null">
+	       #{pic},
+	    </if>
+		<if test="des != null">
+	       #{des},
+	    </if>
+		<if test="priority != null">
+	       #{priority},
+	    </if>
+		<if test="rate != null">
+	       #{rate},
+	    </if>
+		<if test="count != null">
+	       #{count},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="GalaxyDiscountDO">
+        update galaxy_discount
+        <trim prefix="set">
+		    <if test="regionCode != null">
+		        region_code = #{regionCode},
+		    </if> 
+		    <if test="name != null">
+		        name = #{name},
+		    </if> 
+		    <if test="price != null">
+		        price = #{price},
+		    </if> 
+		    <if test="percent != null">
+		        percent = #{percent},
+		    </if> 
+		    <if test="pic != null">
+		        pic = #{pic},
+		    </if> 
+		    <if test="des != null">
+		        des = #{des},
+		    </if> 
+		    <if test="priority != null">
+		        priority = #{priority},
+		    </if> 
+		    <if test="rate != null">
+		        rate = #{rate},
+		    </if> 
+		    <if test="count != null">
+		        count = #{count},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from galaxy_discount
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_discount
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_discount
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="GalaxyDiscountQuery">
+		select count(*) from galaxy_discount
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyDiscountQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from galaxy_discount
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_discount 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+    
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean class=" com.wasu.ptyw.galaxy.common.util.UserHomePlaceholderConfigurer">
+		<property name="locations">
+			<value>galaxy.properties</value>
+		</property>
+	</bean>
+
+	<!-- ======================================================================== -->
+	<!-- DataSource定义。 -->
+	<!-- ======================================================================== -->
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+		destroy-method="close">
+		<property name="poolProperties">
+			<bean class="org.apache.tomcat.jdbc.pool.PoolProperties">
+				<property name="url" value="${jdbc_url}" />
+				<property name="username" value="${jdbc_user}" />
+				<property name="password" value="${jdbc_password}" />
+				<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+				<property name="jmxEnabled" value="true" />
+				<property name="testWhileIdle" value="false" />
+				<property name="testOnBorrow" value="true" />
+				<property name="validationInterval" value="30000" />
+				<property name="testOnReturn" value="false" />
+				<property name="validationQuery" value="select 1" />
+				<property name="timeBetweenEvictionRunsMillis" value="30000" />
+				<property name="maxActive" value="100" />
+				<property name="initialSize" value="10" />
+				<property name="maxWait" value="10000" />
+				<property name="removeAbandonedTimeout" value="60" />
+				<property name="minEvictableIdleTimeMillis" value="30000" />
+				<property name="minIdle" value="10" />
+				<property name="logAbandoned" value="true" />
+				<property name="removeAbandoned" value="true" />
+				<property name="jdbcInterceptors"
+					value="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>

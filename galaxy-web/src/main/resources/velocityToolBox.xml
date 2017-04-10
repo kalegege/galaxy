@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<tools>  
+    <data type="boolean" key="xhtml" value="true"/>  
+    <data type="number" key="version" value="2.0"/>  
+    
+    <data key="foo">this is foo</data>
+    
+     <!-- application /request/session --> 
+    <toolbox scope="application">  
+        <tool key="dateUtil" class="com.wasu.ptyw.galaxy.common.util.DateUtil"/>  
+        <tool key="stringUtil" class="com.wasu.ptyw.galaxy.common.util.StringUtil"/>  
+        <tool key="LC" class="com.wasu.ptyw.galaxy.core.cache.LocalCache"/>
+    </toolbox>  
+</tools> 

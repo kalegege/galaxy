@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyOrderFilmDAO">
+    <resultMap type="GalaxyOrderFilmDO" id="BaseResultMap">
+		<result column="ID" property="id" javaType="java.lang.Long" />
+		<result column="user_id" property="userId" javaType="java.lang.Long" />
+		<result column="out_user_id" property="outUserId" javaType="java.lang.String" />
+		<result column="region_code" property="regionCode" javaType="java.lang.String" />
+		<result column="film_id" property="filmId" javaType="java.lang.Long" />
+		<result column="total_price" property="totalPrice" javaType="java.lang.Integer" />
+		<result column="cont_code" property="contCode" javaType="java.lang.String" />
+		<result column="cont_name" property="contName" javaType="java.lang.String" />
+		<result column="cont_image" property="contImage" javaType="java.lang.String" />
+		<result column="pay_channel" property="payChannel" javaType="java.lang.Integer" />
+		<result column="pay_pre_id" property="payPreId" javaType="java.lang.String" />
+		<result column="pay_buyer_logon_id" property="payBuyerLogonId" javaType="java.lang.String" />
+		<result column="pay_trade_no" property="payTradeNo" javaType="java.lang.String" />
+		<result column="pay_total_fee" property="payTotalFee" javaType="java.lang.Integer" />
+		<result column="pay_time_end" property="payTimeEnd" javaType="java.lang.String" />
+		<result column="pay_pre_time" property="payPreTime" javaType="java.util.Date" />
+		<result column="pay_openid" property="payOpenid" javaType="java.lang.String" />
+		<result column="business_id" property="businessId" javaType="java.lang.Integer" />
+		<result column="expired_date" property="expiredDate" javaType="java.util.Date" />
+		<result column="features" property="features" javaType="java.lang.String" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	ID,	user_id,	out_user_id,	region_code,	film_id,	total_price,	cont_code,	cont_name,	cont_image,	pay_channel,	pay_pre_id,	pay_buyer_logon_id,	pay_trade_no,	pay_total_fee,	pay_time_end,	pay_pre_time,	pay_openid,	business_id,	expired_date,	features,	status,	GMT_CREATE,	GMT_MODIFIED
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="userId != null">
+		        and user_id = #{userId} 
+		    </if> 
+		    <if test="outUserId != null">
+		        and out_user_id = #{outUserId} 
+		    </if> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if> 
+		    <if test="filmId != null">
+		        and film_id = #{filmId} 
+		    </if> 
+		    <if test="totalPrice != null">
+		        and total_price = #{totalPrice} 
+		    </if> 
+		    <if test="contCode != null">
+		        and cont_code = #{contCode} 
+		    </if> 
+		    <if test="contName != null">
+		        and cont_name = #{contName} 
+		    </if> 
+		    <if test="contImage != null">
+		        and cont_image = #{contImage} 
+		    </if> 
+		    <if test="payChannel != null">
+		        and pay_channel = #{payChannel} 
+		    </if> 
+		    <if test="payPreId != null">
+		        and pay_pre_id = #{payPreId} 
+		    </if> 
+		    <if test="payBuyerLogonId != null">
+		        and pay_buyer_logon_id = #{payBuyerLogonId} 
+		    </if> 
+		    <if test="payTradeNo != null">
+		        and pay_trade_no = #{payTradeNo} 
+		    </if> 
+		    <if test="payTotalFee != null">
+		        and pay_total_fee = #{payTotalFee} 
+		    </if> 
+		    <if test="payTimeEnd != null">
+		        and pay_time_end = #{payTimeEnd} 
+		    </if> 
+		    <if test="payPreTime != null">
+		        and pay_pre_time = #{payPreTime} 
+		    </if> 
+		    <if test="payOpenid != null">
+		        and pay_openid = #{payOpenid} 
+		    </if> 
+		    <if test="businessId != null">
+		        and business_id = #{businessId} 
+		    </if> 
+		    <if test="expiredDate != null">
+		        and expired_date = #{expiredDate} 
+		    </if> 
+		    <if test="features != null">
+		        and features = #{features} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+
+			<if test="gmtModifiedEnd != null">
+				and gmt_modified &lt; #{gmtModifiedEnd}
+			</if>
+			<if test="gmtModifiedStart != null">
+				and gmt_modified &gt; #{gmtModifiedStart}
+			</if>
+			
+			<if test="contCodes != null">
+			    and id IN
+				<foreach item="item" index="index" collection="contCodes" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="statusList != null">
+				and status IN
+				<foreach item="item" index="index" collection="statusList" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="GalaxyOrderFilmDO" useGeneratedKeys="true" keyProperty="id">
+        insert into galaxy_order_film (
+		<if test="id != null">
+		   ID,
+		</if>
+		<if test="userId != null">
+		   user_id,
+		</if>
+		<if test="outUserId != null">
+		   out_user_id,
+		</if>
+		<if test="regionCode != null">
+		   region_code,
+		</if>
+		<if test="filmId != null">
+		   film_id,
+		</if>
+		<if test="totalPrice != null">
+		   total_price,
+		</if>
+		<if test="contCode != null">
+		   cont_code,
+		</if>
+		<if test="contName != null">
+		   cont_name,
+		</if>
+		<if test="contImage != null">
+		   cont_image,
+		</if>
+		<if test="payChannel != null">
+		   pay_channel,
+		</if>
+		<if test="payPreId != null">
+		   pay_pre_id,
+		</if>
+		<if test="payBuyerLogonId != null">
+		   pay_buyer_logon_id,
+		</if>
+		<if test="payTradeNo != null">
+		   pay_trade_no,
+		</if>
+		<if test="payTotalFee != null">
+		   pay_total_fee,
+		</if>
+		<if test="payTimeEnd != null">
+		   pay_time_end,
+		</if>
+		<if test="payPreTime != null">
+		   pay_pre_time,
+		</if>
+		<if test="payOpenid != null">
+		   pay_openid,
+		</if>
+		<if test="businessId != null">
+		   business_id,
+		</if>
+		<if test="expiredDate != null">
+		   expired_date,
+		</if>
+		<if test="features != null">
+		   features,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="userId != null">
+	       #{userId},
+	    </if>
+		<if test="outUserId != null">
+	       #{outUserId},
+	    </if>
+		<if test="regionCode != null">
+	       #{regionCode},
+	    </if>
+		<if test="filmId != null">
+	       #{filmId},
+	    </if>
+		<if test="totalPrice != null">
+	       #{totalPrice},
+	    </if>
+		<if test="contCode != null">
+	       #{contCode},
+	    </if>
+		<if test="contName != null">
+	       #{contName},
+	    </if>
+		<if test="contImage != null">
+	       #{contImage},
+	    </if>
+		<if test="payChannel != null">
+	       #{payChannel},
+	    </if>
+		<if test="payPreId != null">
+	       #{payPreId},
+	    </if>
+		<if test="payBuyerLogonId != null">
+	       #{payBuyerLogonId},
+	    </if>
+		<if test="payTradeNo != null">
+	       #{payTradeNo},
+	    </if>
+		<if test="payTotalFee != null">
+	       #{payTotalFee},
+	    </if>
+		<if test="payTimeEnd != null">
+	       #{payTimeEnd},
+	    </if>
+		<if test="payPreTime != null">
+	       #{payPreTime},
+	    </if>
+		<if test="payOpenid != null">
+	       #{payOpenid},
+	    </if>
+		<if test="businessId != null">
+	       #{businessId},
+	    </if>
+		<if test="expiredDate != null">
+	       #{expiredDate},
+	    </if>
+		<if test="features != null">
+	       #{features},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="GalaxyOrderFilmDO">
+        update galaxy_order_film
+        <trim prefix="set">
+		    <if test="userId != null">
+		        user_id = #{userId},
+		    </if> 
+		    <if test="outUserId != null">
+		        out_user_id = #{outUserId},
+		    </if> 
+		    <if test="regionCode != null">
+		        region_code = #{regionCode},
+		    </if> 
+		    <if test="filmId != null">
+		        film_id = #{filmId},
+		    </if> 
+		    <if test="totalPrice != null">
+		        total_price = #{totalPrice},
+		    </if> 
+		    <if test="contCode != null">
+		        cont_code = #{contCode},
+		    </if> 
+		    <if test="contName != null">
+		        cont_name = #{contName},
+		    </if> 
+		    <if test="contImage != null">
+		        cont_image = #{contImage},
+		    </if> 
+		    <if test="payChannel != null">
+		        pay_channel = #{payChannel},
+		    </if> 
+		    <if test="payPreId != null">
+		        pay_pre_id = #{payPreId},
+		    </if> 
+		    <if test="payBuyerLogonId != null">
+		        pay_buyer_logon_id = #{payBuyerLogonId},
+		    </if> 
+		    <if test="payTradeNo != null">
+		        pay_trade_no = #{payTradeNo},
+		    </if> 
+		    <if test="payTotalFee != null">
+		        pay_total_fee = #{payTotalFee},
+		    </if> 
+		    <if test="payTimeEnd != null">
+		        pay_time_end = #{payTimeEnd},
+		    </if> 
+		    <if test="payPreTime != null">
+		        pay_pre_time = #{payPreTime},
+		    </if> 
+		    <if test="payOpenid != null">
+		        pay_openid = #{payOpenid},
+		    </if> 
+		    <if test="businessId != null">
+		        business_id = #{businessId},
+		    </if> 
+		    <if test="expiredDate != null">
+		        expired_date = #{expiredDate},
+		    </if> 
+		    <if test="features != null">
+		        features = #{features},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from galaxy_order_film
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_order_film
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_order_film
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="GalaxyOrderFilmQuery">
+		select count(*) from galaxy_order_film
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyOrderFilmQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from galaxy_order_film
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_order_film 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+    
+</mapper>

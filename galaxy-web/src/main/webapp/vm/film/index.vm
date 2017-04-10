@@ -1,0 +1,96 @@
+#set($staticPath = "$basePath/static/")
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="page-view-size" content="1280*720" />
+<title>彩虹影院</title>
+<style type="text/css">
+* {padding:0; margin:0;}
+body {background:transparent; font-family:Microsoft YaHei;}
+#logo {position:absolute; left:57px; top:31px;}
+#wrapper {width:1280px;height:720px;overflow:hidden;position:relative;}
+
+#mainNav {position:absolute;left:289px;top:530px; width:1280px; height:166px;}
+#mainNav .item {width:106px;height:106px;position:absolute;left:0;}
+#mainNav .item .img { position:absolute; left:0; top:0; width:106px; height:106px;}
+#mainNav .item #mainNav_1_img {background:url(${staticPath}images/indexIco1.png) no-repeat;}
+#mainNav .item #mainNav_2_img {background:url(${staticPath}images/indexIco2.png) no-repeat;}
+#mainNav .item #mainNav_3_img {background:url(${staticPath}images/indexIco3.png) no-repeat;}
+#mainNav .item #mainNav_4_img {background:url(${staticPath}images/indexIco4.png) no-repeat;}
+#mainNav .item #mainNav_5_img {background:url(${staticPath}images/indexIco5.png) no-repeat;}
+#mainNav .itemFocus #mainNav_1_img {background:url(${staticPath}images/indexIco1Focus.png) no-repeat;}
+#mainNav .itemFocus #mainNav_2_img {background:url(${staticPath}images/indexIco2Focus.png) no-repeat;}
+#mainNav .itemFocus #mainNav_3_img {background:url(${staticPath}images/indexIco3Focus.png) no-repeat;}
+#mainNav .itemFocus #mainNav_4_img {background:url(${staticPath}images/indexIco4Focus.png) no-repeat;}
+#mainNav .itemFocus #mainNav_5_img {background:url(${staticPath}images/indexIco5Focus.png) no-repeat;}
+
+#mainNav .item .name {position:absolute; left:0; top:98px; width:100%; text-align:center; font-size:22px; line-height:68px; color:#fff; height:52px; overflow:hidden;}
+#mainNav .item .bg {position:absolute;top:-29px;left:-29px;width:167px;height:166px;}
+
+#mainNav .itemFocus {width:129px; height:129px;}
+#mainNav .itemFocus .img {left:-10px; top:-10px; width:129px; height:129px;}
+#mainNav .itemFocus .name { left:-10px;top:120px; font-size:28px; line-height:60px;}
+#mainNav .itemFocus .bg {background:url(${staticPath}images/indexIcoFocus.png) no-repeat;}
+
+#movieList {width:429px; height:67px;position:absolute; left:811px; top:430px; z-index:2}
+#movieList .item {width:429px; height:67px; background:url(${staticPath}images/indexBt.png) no-repeat;}
+#movieList .itemFocus { background:url(${staticPath}images/indexBtFocus.png) no-repeat;}
+#movieName {position:absolute; top:430px; left:811px; z-index:1}
+#movieSubName {position:absolute; top:506px; left:799px;}
+
+#dot {position:absolute; left:50%; top:550px;}
+#dot .item {background:url(${staticPath}images/dot.png) no-repeat; width:15px; height:13px; position:absolute; left:0; top:0;}
+#dot .itemFocus {background:url(${staticPath}images/dotFocus.png) no-repeat;} 
+
+#loading_icon {position:absolute; left:280px; top:288px; display:none;}
+</style>
+
+</head>
+
+<body onLoad="startonload();" onUnload="unload();">
+<div id="wrapper">
+	<img src="${staticPath}images/indexBg.png" id="bg" />
+	<div id="logo"><img src="${staticPath}images/logo.png" /></div>
+	<div id="mainNav">
+    	<div id="mainNav_1" class="item" style="left:0px;" title=""><div id="mainNav_1_img" class="img"></div><div class="name">在线购票</div><div class="bg"></div></div>
+    	<div id="mainNav_2" class="item" style="left:148px;" title=""><div id="mainNav_2_img" class="img"></div><div class="name">每日福利</div><div class="bg"></div></div>
+    	<div id="mainNav_3" class="item" style="left:296px;" title=""><div id="mainNav_3_img" class="img"></div><div class="name">院线热映</div><div class="bg"></div></div>
+    	<div id="mainNav_4" class="item" style="left:444px;" title=""><div id="mainNav_4_img" class="img"></div><div class="name">个人中心</div><div class="bg"></div></div>
+    	<div id="mainNav_5" class="item" style="left:592px;" title=""><div id="mainNav_5_img" class="img"></div><div class="name">微信互动</div><div class="bg"></div></div>
+    </div>
+    <div id="movieList">
+    	<div id="movieList_1" class="item" title=""></div>
+    </div>
+    
+    #set($left = (840 - $datas.size() * 24 - 11)/2)
+    <div id="dot" style="left:${left}px">
+    	#foreach($item in $datas)
+    		#set($left = ($velocityCount - 1) * 24)
+    		<div id='dot_$velocityCount' class='item' style='left:${left}px'></div>
+    	#end
+    </div>
+    <img src="" width="429" height="67" id="movieName"  />
+    <img src="" width="480" height="29" id="movieSubName" />
+    <img src="${staticPath}images/loading.png" id="loading_icon" />
+</div>
+<script type="text/javascript" src="${staticPath}js/structure.js"></script>
+<script type="text/javascript" src="${staticPath}js/common.js"></script>
+<script type="text/javascript">
+var cur_cookie = "rainbowCinema_1";
+var cookieObjctStr = getCookie(cur_cookie);
+var movies,mainNav,movieList,dot;
+var countFlag=0;
+var addFocusCookie = "_"+countFlag;
+
+var uid = getQueryString("uid");
+var tvid = getQueryString("tvid");
+
+movies = $jsonDatas;
+
+var ajaxSrc = ajaxIp+"/film/index?region_code="+region_code+"&uid="+uid+"&stbid="+tvid+"&callback=init&time="+new Date().getTime();
+
+
+</script>
+</body>
+</html>

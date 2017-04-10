@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.ChanelActorDAO">
+    <resultMap type="ChanelActorDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="name" property="name" javaType="java.lang.String" />
+		<result column="sex" property="sex" javaType="java.lang.String" />
+		<result column="birth" property="birth" javaType="java.lang.String" />
+		<result column="des" property="des" javaType="java.lang.String" />
+		<result column="image" property="image" javaType="java.lang.String" />
+		<result column="image_name" property="imageName" javaType="java.lang.String" />
+		<result column="poster" property="poster" javaType="java.lang.String" />
+		<result column="poster_name" property="posterName" javaType="java.lang.String" />
+		<result column="background" property="background" javaType="java.lang.String" />
+		<result column="background_name" property="backgroundName" javaType="java.lang.String" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="gmt_create" property="gmtCreate" javaType="java.util.Date" />
+		<result column="gmt_modified" property="gmtModified" javaType="java.util.Date" />
+		<result column="publishid" property="publishid" javaType="java.lang.Long"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	name,	sex,	birth,	des,	image,	image_name,	poster,	poster_name,	background,	background_name,	status,	gmt_create,	gmt_modified,publishid
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="name != null">
+		        and name = #{name} 
+		    </if> 
+		    <if test="sex != null">
+		        and sex = #{sex} 
+		    </if> 
+		    <if test="birth != null">
+		        and birth = #{birth} 
+		    </if> 
+		    <if test="des != null">
+		        and des = #{des} 
+		    </if> 
+		    <if test="image != null">
+		        and image = #{image} 
+		    </if> 
+		    <if test="imageName != null">
+		        and image_name = #{imageName} 
+		    </if> 
+		    <if test="poster != null">
+		        and poster = #{poster} 
+		    </if> 
+		    <if test="posterName != null">
+		        and poster_name = #{posterName} 
+		    </if> 
+		    <if test="background != null">
+		        and background = #{background} 
+		    </if> 
+		    <if test="backgroundName != null">
+		        and background_name = #{backgroundName} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+		    <if test="publishid >= 0">
+		        <![CDATA[and publishid >=0]]>
+		    </if>
+		     <if test="publishid == -1">
+		        and publishid = -1
+		    </if>
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="ChanelActorDO" useGeneratedKeys="true" keyProperty="id">
+        insert into chanel_actor (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="name != null">
+		   name,
+		</if>
+		<if test="sex != null">
+		   sex,
+		</if>
+		<if test="birth != null">
+		   birth,
+		</if>
+		<if test="des != null">
+		   des,
+		</if>
+		<if test="image != null">
+		   image,
+		</if>
+		<if test="imageName != null">
+		   image_name,
+		</if>
+		<if test="poster != null">
+		   poster,
+		</if>
+		<if test="posterName != null">
+		   poster_name,
+		</if>
+		<if test="background != null">
+		   background,
+		</if>
+		<if test="backgroundName != null">
+		   background_name,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		<if test="publishid !=null">
+		    publishid,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="name != null">
+	       #{name},
+	    </if>
+		<if test="sex != null">
+	       #{sex},
+	    </if>
+		<if test="birth != null">
+	       #{birth},
+	    </if>
+		<if test="des != null">
+	       #{des},
+	    </if>
+		<if test="image != null">
+	       #{image},
+	    </if>
+		<if test="imageName != null">
+	       #{imageName},
+	    </if>
+		<if test="poster != null">
+	       #{poster},
+	    </if>
+		<if test="posterName != null">
+	       #{posterName},
+	    </if>
+		<if test="background != null">
+	       #{background},
+	    </if>
+		<if test="backgroundName != null">
+	       #{backgroundName},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+	    <if test="publishid !=null">
+	       #{publishid},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+    <update id="update" parameterType="ChanelActorDO">
+        update chanel_actor
+        <trim prefix="set">
+		    <if test="name != null">
+		        name = #{name},
+		    </if> 
+		    <if test="sex != null">
+		        sex = #{sex},
+		    </if> 
+		    <if test="birth != null">
+		        birth = #{birth},
+		    </if> 
+		    <if test="des != null">
+		        des = #{des},
+		    </if> 
+		    <if test="image != null">
+		        image = #{image},
+		    </if> 
+		    <if test="imageName != null">
+		        image_name = #{imageName},
+		    </if> 
+		    <if test="poster != null">
+		        poster = #{poster},
+		    </if> 
+		    <if test="posterName != null">
+		        poster_name = #{posterName},
+		    </if> 
+		    <if test="background != null">
+		        background = #{background},
+		    </if> 
+		    <if test="backgroundName != null">
+		        background_name = #{backgroundName},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+		    <if test="publishid != null">
+		        publishid = #{publishid},
+		    </if>
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from chanel_actor
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_actor
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_actor
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="ChanelActorQuery">
+		select count(*) from chanel_actor
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="ChanelActorQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_actor
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE chanel_actor 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+    <select id="queryRecommend" resultMap="BaseResultMap" parameterType="ChanelActorQuery">
+		select 	* from chanel_actor 
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+	</select>
+	
+	<select id="getRecommend" resultMap="BaseResultMap" parameterType="ChanelActorQuery">
+		select 	* from chanel_actor where publishId =-1 and status =1
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+	    limit 0 , 4
+	</select>
+	
+	<select id="queryCountOnline" resultType="int" parameterType="ChanelActorQuery">
+		select count(*) from chanel_actor where  status =1  <![CDATA[and publishid >=0]]> 
+	</select> 
+	
+	<select id="queryOnline" resultMap="BaseResultMap" parameterType="ChanelActorQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_actor where   status =1  <![CDATA[and publishid >=0]]>
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	
+	<select id="queryCountOffline" resultType="int" parameterType="ChanelActorQuery">
+		select count(*) from chanel_actor where publishid = 0
+	</select> 
+	
+	<select id="queryOffline" resultMap="BaseResultMap" parameterType="ChanelActorQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_actor where publishid = 0
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	
+	<select id="queryOffline1" resultMap="BaseResultMap" parameterType="ChanelActorQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_actor where 	status = 0
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	
+	<select id="getByActorIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_actor
+       	WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>
+    
+    
+</mapper>

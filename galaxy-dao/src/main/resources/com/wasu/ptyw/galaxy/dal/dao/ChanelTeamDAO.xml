@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.ChanelTeamDAO">
+    <resultMap type="ChanelTeamDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="b_id" property="bId" javaType="java.lang.String" />
+		<result column="b_name" property="bName" javaType="java.lang.String" />
+		<result column="region_id" property="regionId" javaType="java.lang.String" />
+		<result column="firstChId" property="firstchid" javaType="java.lang.String" />
+		<result column="sortby" property="sortby" javaType="java.lang.Integer" />
+		<result column="gmt_modified" property="gmtModified" javaType="java.util.Date" />
+		<result column="gmt_create" property="gmtCreate" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	b_id,	b_name,	region_id,	firstChId,	sortby,	gmt_modified,	gmt_create
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="bId != null">
+		        and b_id = #{bId} 
+		    </if> 
+		    <if test="bName != null">
+		        and b_name = #{bName} 
+		    </if> 
+		    <if test="regionId != null">
+		        and region_id = #{regionId} 
+		    </if> 
+		    <if test="firstchid != null">
+		        and firstChId = #{firstchid} 
+		    </if> 
+		    <if test="sortby != null">
+		        and sortby = #{sortby} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="ChanelTeamDO" useGeneratedKeys="true" keyProperty="id">
+        insert into chanel_team (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="bId != null">
+		   b_id,
+		</if>
+		<if test="bName != null">
+		   b_name,
+		</if>
+		<if test="regionId != null">
+		   region_id,
+		</if>
+		<if test="firstchid != null">
+		   firstChId,
+		</if>
+		<if test="sortby != null">
+		   sortby,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="bId != null">
+	       #{bId},
+	    </if>
+		<if test="bName != null">
+	       #{bName},
+	    </if>
+		<if test="regionId != null">
+	       #{regionId},
+	    </if>
+		<if test="firstchid != null">
+	       #{firstchid},
+	    </if>
+		<if test="sortby != null">
+	       #{sortby},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="ChanelTeamDO">
+        update chanel_team
+        <trim prefix="set">
+		    <if test="bId != null">
+		        b_id = #{bId},
+		    </if> 
+		    <if test="bName != null">
+		        b_name = #{bName},
+		    </if> 
+		    <if test="regionId != null">
+		        region_id = #{regionId},
+		    </if> 
+		    <if test="firstchid != null">
+		        firstChId = #{firstchid},
+		    </if> 
+		    <if test="sortby != null">
+		        sortby = #{sortby},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from chanel_team
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_team
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_team
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="ChanelTeamQuery">
+		select count(*) from chanel_team
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="queryCountTeam" resultType="int" parameterType="ChanelTeamQuery">
+		select count(*) from chanel_team
+		where region_id = #{regionId} and sortby  &lt;  1000
+	</select> 
+	
+	<select id="queryCountType" resultType="int" parameterType="ChanelTeamQuery">
+		select count(*) from chanel_team
+		where region_id = #{regionId} and sortby > 1000
+	</select> 
+	
+	<select id="queryCountNull" resultType="int" parameterType="ChanelTeamQuery">
+		select count(*) from chanel_team
+		where region_id = #{regionId} and sortby is  null
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="ChanelTeamQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team
+			<include refid="queryCondition" />
+	        order by sortby ,id
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	
+	<select id="queryTeam" resultMap="BaseResultMap" parameterType="ChanelTeamQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team
+		where region_id = #{regionId} and sortby  &lt;  1000
+	        order by sortby ,id
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	
+	<select id="queryType" resultMap="BaseResultMap" parameterType="ChanelTeamQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team
+		where region_id = #{regionId} and sortby > 1000
+	        order by sortby ,id
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	
+	<select id="queryTeamOrder" resultMap="BaseResultMap" parameterType="ChanelTeamQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from  chanel_team
+		WHERE  sortby = #{sortby}
+	</select>
+	
+	<select id="queryNull" resultMap="BaseResultMap" parameterType="ChanelTeamQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team
+		where region_id = #{regionId} and sortby is  null
+	        order by id
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+    <select id="queryByBid" resultMap="BaseResultMap"
+		parameterType="ChanelTeamQuery">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_team
+		WHERE b_id = #{bId}
+	</select>
+	
+    <select id="queryByRegion" resultMap="BaseResultMap" parameterType="ChanelTeamQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team
+		WHERE  region_id = #{regionId}
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+    <update id="updateOnly" parameterType="ChanelTeamDO">
+        update chanel_team
+        <trim prefix="set">
+		    <if test="bId != null">
+		        b_id = #{bId},
+		    </if> 
+		    <if test="bName != null">
+		        b_name = #{bName},
+		    </if> 
+		    <if test="regionId != null">
+		        region_id = #{regionId},
+		    </if> 
+		    <if test="firstchid != null">
+		        firstChId = #{firstchid},
+		    </if> 
+		    <if test="sortby != null">
+		        sortby = #{sortby},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        WHERE b_id=#{bId}
+        	<if test="regionId != null">
+		        and region_id = #{regionId} 
+		    </if> 
+    </update>  
+    <select id="querySortBy"  parameterType="ChanelTeamQuery" resultType="long">
+		select id from chanel_team
+		WHERE  region_id = #{regionId} and sortby = #{sortby}
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+	
+    <update id="updateSortByAdd" parameterType="java.lang.Integer" >
+        update chanel_team
+		set   sortby = sortby + 1     
+        WHERE sortby >= #{sortby}	
+    </update> 
+    <update id="updateSortByDecrease" parameterType="java.lang.Integer" >
+        update chanel_team
+		set   sortby = sortby - 1     
+        WHERE sortby > #{sortby}	
+    </update> 
+</mapper>

@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyFilmDAO">
+    <resultMap type="GalaxyFilmDO" id="BaseResultMap">
+		<result column="ID" property="id" javaType="java.lang.Long" />
+		<result column="region_code" property="regionCode" javaType="java.lang.String" />
+		<result column="folder_code" property="folderCode" javaType="java.lang.String" />
+		<result column="asset_id" property="assetId" javaType="java.lang.String" />
+		<result column="asset_type" property="assetType" javaType="java.lang.Integer" />
+		<result column="name" property="name" javaType="java.lang.String" />
+		<result column="sub2_name" property="sub2Name" javaType="java.lang.String" />
+		<result column="isHD" property="ishd" javaType="java.lang.Integer" />
+		<result column="price" property="price" javaType="java.lang.Integer" />
+		<result column="year" property="year" javaType="java.lang.String" />
+		<result column="actors" property="actors" javaType="java.lang.String" />
+		<result column="directors" property="directors" javaType="java.lang.String" />
+		<result column="viewpoint" property="viewpoint" javaType="java.lang.String" />
+		<result column="des" property="des" javaType="java.lang.String" />
+		<result column="rtsp_url" property="rtspUrl" javaType="java.lang.String" />
+		<result column="asset_url" property="assetUrl" javaType="java.lang.String" />
+		<result column="starlevel" property="starlevel" javaType="java.lang.Integer" />
+		<result column="leixing" property="leixing" javaType="java.lang.String" />
+		<result column="haibao_url" property="haibaoUrl" javaType="java.lang.String" />
+		<result column="caotu_url" property="caotuUrl" javaType="java.lang.String" />
+		<result column="juzhao_url" property="juzhaoUrl" javaType="java.lang.String" />
+		<result column="beijing_url" property="beijingUrl" javaType="java.lang.String" />
+		<result column="biaoti_url" property="biaotiUrl" javaType="java.lang.String" />
+		<result column="alias_name" property="aliasName" javaType="java.lang.String" />
+		<result column="alias_price" property="aliasPrice" javaType="java.lang.Integer" />
+		<result column="weixin_code" property="weixinCode" javaType="java.lang.String" />
+		<result column="taobao_code" property="taobaoCode" javaType="java.lang.String" />
+		<result column="link_film_ids" property="linkFilmIds" javaType="java.lang.String" />
+		<result column="features" property="features" javaType="java.lang.String" />
+		<result column="update_count" property="updateCount" javaType="java.lang.Integer" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="clps_status" property="clpsStatus" javaType="java.lang.Integer" />
+		<result column="priority" property="priority" javaType="java.lang.Integer" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	ID,	region_code,	folder_code,	asset_id,	asset_type,	name,	sub2_name,	isHD,	price,	year,	actors,	directors,	viewpoint,	des,	rtsp_url,	asset_url,	starlevel,	leixing,	haibao_url,	caotu_url,	juzhao_url,	beijing_url,	biaoti_url,	alias_name,	alias_price,	weixin_code,	taobao_code,	link_film_ids,	features,	update_count,	status,	clps_status,	priority,	GMT_CREATE,	GMT_MODIFIED
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if> 
+		    <if test="folderCode != null">
+		        and folder_code = #{folderCode} 
+		    </if> 
+		    <if test="assetId != null">
+		        and asset_id = #{assetId} 
+		    </if> 
+		    <if test="assetType != null">
+		        and asset_type = #{assetType} 
+		    </if> 
+		    <if test="name != null">
+		        and name = #{name} 
+		    </if> 
+		    <if test="sub2Name != null">
+		        and sub2_name = #{sub2Name} 
+		    </if> 
+		    <if test="ishd != null">
+		        and isHD = #{ishd} 
+		    </if> 
+		    <if test="price != null">
+		        and price = #{price} 
+		    </if> 
+		    <if test="year != null">
+		        and year = #{year} 
+		    </if> 
+		    <if test="actors != null">
+		        and actors = #{actors} 
+		    </if> 
+		    <if test="directors != null">
+		        and directors = #{directors} 
+		    </if> 
+		    <if test="viewpoint != null">
+		        and viewpoint = #{viewpoint} 
+		    </if> 
+		    <if test="des != null">
+		        and des = #{des} 
+		    </if> 
+		    <if test="rtspUrl != null">
+		        and rtsp_url = #{rtspUrl} 
+		    </if> 
+		    <if test="assetUrl != null">
+		        and asset_url = #{assetUrl} 
+		    </if> 
+		    <if test="starlevel != null">
+		        and starlevel = #{starlevel} 
+		    </if> 
+		    <if test="leixing != null">
+		        and leixing = #{leixing} 
+		    </if> 
+		    <if test="haibaoUrl != null">
+		        and haibao_url = #{haibaoUrl} 
+		    </if> 
+		    <if test="caotuUrl != null">
+		        and caotu_url = #{caotuUrl} 
+		    </if> 
+		    <if test="juzhaoUrl != null">
+		        and juzhao_url = #{juzhaoUrl} 
+		    </if> 
+		    <if test="beijingUrl != null">
+		        and beijing_url = #{beijingUrl} 
+		    </if> 
+		    <if test="biaotiUrl != null">
+		        and biaoti_url = #{biaotiUrl} 
+		    </if> 
+		    <if test="aliasName != null">
+		        and alias_name = #{aliasName} 
+		    </if> 
+		    <if test="aliasPrice != null">
+		        and alias_price = #{aliasPrice} 
+		    </if> 
+		    <if test="weixinCode != null">
+		        and weixin_code = #{weixinCode} 
+		    </if> 
+		    <if test="taobaoCode != null">
+		        and taobao_code = #{taobaoCode} 
+		    </if> 
+		    <if test="linkFilmIds != null">
+		        and link_film_ids = #{linkFilmIds} 
+		    </if> 
+		    <if test="features != null">
+		        and features = #{features} 
+		    </if> 
+		    <if test="updateCount != null">
+		        and update_count = #{updateCount} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+		    <if test="clpsStatus != null">
+		        and clps_status = #{clpsStatus} 
+		    </if> 
+		    <if test="priority != null">
+		        and priority = #{priority} 
+		    </if> 
+		    <if test="likeName != null">
+		        and name like '%${likeName}%'
+		    </if> 
+		    <if test="assetIds != null">
+		        and asset_id IN 
+		        <foreach item="item" index="index" collection="assetIds" open="(" separator="," close=")">
+		        	#{item}
+		  		</foreach>
+		    </if>
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="GalaxyFilmDO" useGeneratedKeys="true" keyProperty="id">
+        insert into galaxy_film (
+		<if test="id != null">
+		   ID,
+		</if>
+		<if test="regionCode != null">
+		   region_code,
+		</if>
+		<if test="folderCode != null">
+		   folder_code,
+		</if>
+		<if test="assetId != null">
+		   asset_id,
+		</if>
+		<if test="assetType != null">
+		   asset_type,
+		</if>
+		<if test="name != null">
+		   name,
+		</if>
+		<if test="sub2Name != null">
+		   sub2_name,
+		</if>
+		<if test="ishd != null">
+		   isHD,
+		</if>
+		<if test="price != null">
+		   price,
+		</if>
+		<if test="year != null">
+		   year,
+		</if>
+		<if test="actors != null">
+		   actors,
+		</if>
+		<if test="directors != null">
+		   directors,
+		</if>
+		<if test="viewpoint != null">
+		   viewpoint,
+		</if>
+		<if test="des != null">
+		   des,
+		</if>
+		<if test="rtspUrl != null">
+		   rtsp_url,
+		</if>
+		<if test="assetUrl != null">
+		   asset_url,
+		</if>
+		<if test="starlevel != null">
+		   starlevel,
+		</if>
+		<if test="leixing != null">
+		   leixing,
+		</if>
+		<if test="haibaoUrl != null">
+		   haibao_url,
+		</if>
+		<if test="caotuUrl != null">
+		   caotu_url,
+		</if>
+		<if test="juzhaoUrl != null">
+		   juzhao_url,
+		</if>
+		<if test="beijingUrl != null">
+		   beijing_url,
+		</if>
+		<if test="biaotiUrl != null">
+		   biaoti_url,
+		</if>
+		<if test="aliasName != null">
+		   alias_name,
+		</if>
+		<if test="aliasPrice != null">
+		   alias_price,
+		</if>
+		<if test="weixinCode != null">
+		   weixin_code,
+		</if>
+		<if test="taobaoCode != null">
+		   taobao_code,
+		</if>
+		<if test="linkFilmIds != null">
+		   link_film_ids,
+		</if>
+		<if test="features != null">
+		   features,
+		</if>
+		<if test="updateCount != null">
+		   update_count,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		<if test="clpsStatus != null">
+		   clps_status,
+		</if>
+		<if test="priority != null">
+		   priority,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="regionCode != null">
+	       #{regionCode},
+	    </if>
+		<if test="folderCode != null">
+	       #{folderCode},
+	    </if>
+		<if test="assetId != null">
+	       #{assetId},
+	    </if>
+		<if test="assetType != null">
+	       #{assetType},
+	    </if>
+		<if test="name != null">
+	       #{name},
+	    </if>
+		<if test="sub2Name != null">
+	       #{sub2Name},
+	    </if>
+		<if test="ishd != null">
+	       #{ishd},
+	    </if>
+		<if test="price != null">
+	       #{price},
+	    </if>
+		<if test="year != null">
+	       #{year},
+	    </if>
+		<if test="actors != null">
+	       #{actors},
+	    </if>
+		<if test="directors != null">
+	       #{directors},
+	    </if>
+		<if test="viewpoint != null">
+	       #{viewpoint},
+	    </if>
+		<if test="des != null">
+	       #{des},
+	    </if>
+		<if test="rtspUrl != null">
+	       #{rtspUrl},
+	    </if>
+		<if test="assetUrl != null">
+	       #{assetUrl},
+	    </if>
+		<if test="starlevel != null">
+	       #{starlevel},
+	    </if>
+		<if test="leixing != null">
+	       #{leixing},
+	    </if>
+		<if test="haibaoUrl != null">
+	       #{haibaoUrl},
+	    </if>
+		<if test="caotuUrl != null">
+	       #{caotuUrl},
+	    </if>
+		<if test="juzhaoUrl != null">
+	       #{juzhaoUrl},
+	    </if>
+		<if test="beijingUrl != null">
+	       #{beijingUrl},
+	    </if>
+		<if test="biaotiUrl != null">
+	       #{biaotiUrl},
+	    </if>
+		<if test="aliasName != null">
+	       #{aliasName},
+	    </if>
+		<if test="aliasPrice != null">
+	       #{aliasPrice},
+	    </if>
+		<if test="weixinCode != null">
+	       #{weixinCode},
+	    </if>
+		<if test="taobaoCode != null">
+	       #{taobaoCode},
+	    </if>
+		<if test="linkFilmIds != null">
+	       #{linkFilmIds},
+	    </if>
+		<if test="features != null">
+	       #{features},
+	    </if>
+		<if test="updateCount != null">
+	       #{updateCount},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+		<if test="clpsStatus != null">
+	       #{clpsStatus},
+	    </if>
+		<if test="priority != null">
+	       #{priority},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="GalaxyFilmDO">
+        update galaxy_film
+        <trim prefix="set">
+		    <if test="regionCode != null">
+		        region_code = #{regionCode},
+		    </if> 
+		    <if test="folderCode != null">
+		        folder_code = #{folderCode},
+		    </if> 
+		    <if test="assetId != null">
+		        asset_id = #{assetId},
+		    </if> 
+		    <if test="assetType != null">
+		        asset_type = #{assetType},
+		    </if> 
+		    <if test="name != null">
+		        name = #{name},
+		    </if> 
+		    <if test="sub2Name != null">
+		        sub2_name = #{sub2Name},
+		    </if> 
+		    <if test="ishd != null">
+		        isHD = #{ishd},
+		    </if> 
+		    <if test="price != null">
+		        price = #{price},
+		    </if> 
+		    <if test="year != null">
+		        year = #{year},
+		    </if> 
+		    <if test="actors != null">
+		        actors = #{actors},
+		    </if> 
+		    <if test="directors != null">
+		        directors = #{directors},
+		    </if> 
+		    <if test="viewpoint != null">
+		        viewpoint = #{viewpoint},
+		    </if> 
+		    <if test="des != null">
+		        des = #{des},
+		    </if> 
+		    <if test="rtspUrl != null">
+		        rtsp_url = #{rtspUrl},
+		    </if> 
+		    <if test="assetUrl != null">
+		        asset_url = #{assetUrl},
+		    </if> 
+		    <if test="starlevel != null">
+		        starlevel = #{starlevel},
+		    </if> 
+		    <if test="leixing != null">
+		        leixing = #{leixing},
+		    </if> 
+		    <if test="haibaoUrl != null">
+		        haibao_url = #{haibaoUrl},
+		    </if> 
+		    <if test="caotuUrl != null">
+		        caotu_url = #{caotuUrl},
+		    </if> 
+		    <if test="juzhaoUrl != null">
+		        juzhao_url = #{juzhaoUrl},
+		    </if> 
+		    <if test="beijingUrl != null">
+		        beijing_url = #{beijingUrl},
+		    </if> 
+		    <if test="biaotiUrl != null">
+		        biaoti_url = #{biaotiUrl},
+		    </if> 
+		    <if test="aliasName != null">
+		        alias_name = #{aliasName},
+		    </if> 
+		    <if test="aliasPrice != null">
+		        alias_price = #{aliasPrice},
+		    </if> 
+		    <if test="weixinCode != null">
+		        weixin_code = #{weixinCode},
+		    </if> 
+		    <if test="taobaoCode != null">
+		        taobao_code = #{taobaoCode},
+		    </if> 
+		    <if test="linkFilmIds != null">
+		        link_film_ids = #{linkFilmIds},
+		    </if> 
+		    <if test="features != null">
+		        features = #{features},
+		    </if> 
+		    <if test="updateCount != null">
+		        update_count = #{updateCount},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+		    <if test="clpsStatus != null">
+		        clps_status = #{clpsStatus},
+		    </if> 
+		    <if test="priority != null">
+		        priority = #{priority},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from galaxy_film
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_film
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_film
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="GalaxyFilmQuery">
+		select count(*) from galaxy_film
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyFilmQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from galaxy_film
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_film 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+    
+</mapper>

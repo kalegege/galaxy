@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyUserDAO">
+    <resultMap type="GalaxyUserDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="stb_id" property="stbId" javaType="java.lang.String" />
+		<result column="out_user_id" property="outUserId" javaType="java.lang.String" />
+		<result column="region_code" property="regionCode" javaType="java.lang.String" />
+		<result column="bind_alipay_user_id" property="bindAlipayUserId" javaType="java.lang.String" />
+		<result column="bind_alipay_time" property="bindAlipayTime" javaType="java.lang.String" />
+		<result column="bind_weixin_user_id" property="bindWeixinUserId" javaType="java.lang.String" />
+		<result column="bind_weixin_time" property="bindWeixinTime" javaType="java.lang.String" />
+		<result column="features" property="features" javaType="java.lang.String" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	stb_id,	out_user_id,	region_code,	bind_alipay_user_id,	bind_alipay_time,	bind_weixin_user_id,	bind_weixin_time,	features,	status,	GMT_CREATE,	GMT_MODIFIED
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="stbId != null">
+		        and stb_id = #{stbId} 
+		    </if> 
+		    <if test="outUserId != null">
+		        and out_user_id = #{outUserId} 
+		    </if> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if> 
+		    <if test="bindAlipayUserId != null">
+		        and bind_alipay_user_id = #{bindAlipayUserId} 
+		    </if> 
+		    <if test="bindAlipayTime != null">
+		        and bind_alipay_time = #{bindAlipayTime} 
+		    </if> 
+		    <if test="bindWeixinUserId != null">
+		        and bind_weixin_user_id = #{bindWeixinUserId} 
+		    </if> 
+		    <if test="bindWeixinTime != null">
+		        and bind_weixin_time = #{bindWeixinTime} 
+		    </if> 
+		    <if test="features != null">
+		        and features = #{features} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="GalaxyUserDO" useGeneratedKeys="true" keyProperty="id">
+        insert into galaxy_user (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="stbId != null">
+		   stb_id,
+		</if>
+		<if test="outUserId != null">
+		   out_user_id,
+		</if>
+		<if test="regionCode != null">
+		   region_code,
+		</if>
+		<if test="bindAlipayUserId != null">
+		   bind_alipay_user_id,
+		</if>
+		<if test="bindAlipayTime != null">
+		   bind_alipay_time,
+		</if>
+		<if test="bindWeixinUserId != null">
+		   bind_weixin_user_id,
+		</if>
+		<if test="bindWeixinTime != null">
+		   bind_weixin_time,
+		</if>
+		<if test="features != null">
+		   features,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="stbId != null">
+	       #{stbId},
+	    </if>
+		<if test="outUserId != null">
+	       #{outUserId},
+	    </if>
+		<if test="regionCode != null">
+	       #{regionCode},
+	    </if>
+		<if test="bindAlipayUserId != null">
+	       #{bindAlipayUserId},
+	    </if>
+		<if test="bindAlipayTime != null">
+	       #{bindAlipayTime},
+	    </if>
+		<if test="bindWeixinUserId != null">
+	       #{bindWeixinUserId},
+	    </if>
+		<if test="bindWeixinTime != null">
+	       #{bindWeixinTime},
+	    </if>
+		<if test="features != null">
+	       #{features},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="GalaxyUserDO">
+        update galaxy_user
+        <trim prefix="set">
+		    <if test="stbId != null">
+		        stb_id = #{stbId},
+		    </if> 
+		    <if test="outUserId != null">
+		        out_user_id = #{outUserId},
+		    </if> 
+		    <if test="regionCode != null">
+		        region_code = #{regionCode},
+		    </if> 
+		    <if test="bindAlipayUserId != null">
+		        bind_alipay_user_id = #{bindAlipayUserId},
+		    </if> 
+		    <if test="bindAlipayTime != null">
+		        bind_alipay_time = #{bindAlipayTime},
+		    </if> 
+		    <if test="bindWeixinUserId != null">
+		        bind_weixin_user_id = #{bindWeixinUserId},
+		    </if> 
+		    <if test="bindWeixinTime != null">
+		        bind_weixin_time = #{bindWeixinTime},
+		    </if> 
+		    <if test="features != null">
+		        features = #{features},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from galaxy_user
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_user
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_user
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="GalaxyUserQuery">
+		select count(*) from galaxy_user
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyUserQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from galaxy_user
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_user 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+    
+</mapper>

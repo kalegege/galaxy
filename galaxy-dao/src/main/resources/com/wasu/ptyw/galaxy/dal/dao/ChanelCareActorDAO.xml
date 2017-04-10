@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.ChanelCareActorDAO">
+    <resultMap type="ChanelCareActorDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="uid" property="uid" javaType="java.lang.String" />
+		<result column="actor_id" property="actorId" javaType="java.lang.Integer" />
+		<result column="region_id" property="regionId" javaType="java.lang.String" />
+		<result column="sequence" property="sequence" javaType="java.lang.Integer" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="gmt_create" property="gmtCreate" javaType="java.util.Date" />
+		<result column="gmt_modified" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	uid,	actor_id,	region_id,	sequence,	status,	gmt_create,	gmt_modified
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="uid != null">
+		        and uid = #{uid} 
+		    </if> 
+		    <if test="actorId != null">
+		        and actor_id = #{actorId} 
+		    </if> 
+		    <if test="regionId != null">
+		        and region_id = #{regionId} 
+		    </if> 
+		    <if test="sequence != null">
+		        and sequence = #{sequence} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="ChanelCareActorDO" useGeneratedKeys="true" keyProperty="id">
+        insert into chanel_care_actor (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="uid != null">
+		   uid,
+		</if>
+		<if test="actorId != null">
+		   actor_id,
+		</if>
+		<if test="regionId != null">
+		   region_id,
+		</if>
+		<if test="sequence != null">
+		   sequence,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="uid != null">
+	       #{uid},
+	    </if>
+		<if test="actorId != null">
+	       #{actorId},
+	    </if>
+		<if test="regionId != null">
+	       #{regionId},
+	    </if>
+		<if test="sequence != null">
+	       #{sequence},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="ChanelCareActorDO">
+        update chanel_care_actor
+        <trim prefix="set">
+		    <if test="uid != null">
+		        uid = #{uid},
+		    </if> 
+		    <if test="actorId != null">
+		        actor_id = #{actorId},
+		    </if> 
+		    <if test="regionId != null">
+		        region_id = #{regionId},
+		    </if> 
+		    <if test="sequence != null">
+		        sequence = #{sequence},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from chanel_care_actor
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_care_actor
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_care_actor
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    
+    <select id="queryCount" resultType="int" parameterType="ChanelCareActorQuery">
+		select count(*) from chanel_care_actor
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="ChanelCareActorQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_care_actor
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE chanel_care_actor 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+    
+</mapper>

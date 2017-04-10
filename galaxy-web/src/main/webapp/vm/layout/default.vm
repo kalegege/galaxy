@@ -1,0 +1,4 @@
+$screen_content
+<script type="text/javascript">
+	var basePath = "${request.contextPath}";
+</script>

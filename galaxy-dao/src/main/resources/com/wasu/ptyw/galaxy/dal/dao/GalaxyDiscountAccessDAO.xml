@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyDiscountAccessDAO">
+    <resultMap type="GalaxyDiscountAccessDO" id="BaseResultMap">
+		<result column="ID" property="id" javaType="java.lang.Long" />
+		<result column="user_id" property="userId" javaType="java.lang.Long" />
+		<result column="out_user_id" property="outUserId" javaType="java.lang.String" />
+		<result column="region_code" property="regionCode" javaType="java.lang.String" />
+		<result column="ip" property="ip" javaType="java.lang.String" />
+		<result column="des" property="des" javaType="java.lang.String" />
+		<result column="gmt_day" property="gmtDay" javaType="java.lang.String" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	ID,	user_id,	out_user_id,	region_code,	ip,	des,	gmt_day,	status,	GMT_CREATE,	GMT_MODIFIED
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="userId != null">
+		        and user_id = #{userId} 
+		    </if> 
+		    <if test="outUserId != null">
+		        and out_user_id = #{outUserId} 
+		    </if> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if> 
+		    <if test="ip != null">
+		        and ip = #{ip} 
+		    </if> 
+		    <if test="des != null">
+		        and des = #{des} 
+		    </if> 
+		    <if test="gmtDay != null">
+		        and gmt_day = #{gmtDay} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+		    <if test="statusList != null">
+				and status IN
+				<foreach item="item" index="index" collection="statusList" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="GalaxyDiscountAccessDO" useGeneratedKeys="true" keyProperty="id">
+        insert into galaxy_discount_access (
+		<if test="id != null">
+		   ID,
+		</if>
+		<if test="userId != null">
+		   user_id,
+		</if>
+		<if test="outUserId != null">
+		   out_user_id,
+		</if>
+		<if test="regionCode != null">
+		   region_code,
+		</if>
+		<if test="ip != null">
+		   ip,
+		</if>
+		<if test="des != null">
+		   des,
+		</if>
+		<if test="gmtDay != null">
+		   gmt_day,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="userId != null">
+	       #{userId},
+	    </if>
+		<if test="outUserId != null">
+	       #{outUserId},
+	    </if>
+		<if test="regionCode != null">
+	       #{regionCode},
+	    </if>
+		<if test="ip != null">
+	       #{ip},
+	    </if>
+		<if test="des != null">
+	       #{des},
+	    </if>
+		<if test="gmtDay != null">
+	       #{gmtDay},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="GalaxyDiscountAccessDO">
+        update galaxy_discount_access
+        <trim prefix="set">
+		    <if test="userId != null">
+		        user_id = #{userId},
+		    </if> 
+		    <if test="outUserId != null">
+		        out_user_id = #{outUserId},
+		    </if> 
+		    <if test="regionCode != null">
+		        region_code = #{regionCode},
+		    </if> 
+		    <if test="ip != null">
+		        ip = #{ip},
+		    </if> 
+		    <if test="des != null">
+		        des = #{des},
+		    </if> 
+		    <if test="gmtDay != null">
+		        gmt_day = #{gmtDay},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from galaxy_discount_access
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_discount_access
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_discount_access
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="GalaxyDiscountAccessQuery">
+		select count(*) from galaxy_discount_access
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyDiscountAccessQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from galaxy_discount_access
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_discount_access 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+    
+</mapper>

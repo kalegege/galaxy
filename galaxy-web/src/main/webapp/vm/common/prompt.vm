@@ -1,0 +1,22 @@
+<div  class="warning-block" #if($!errorMessage||$!errorList||$message) style="display:block" #end>
+		#if($message)
+			<div class="ico-right"></div>
+    	    <div class="tip-info">
+    			<h3>$message</h3>
+            </div>
+		#else
+			<div class="ico-error"></div>
+                  <div class="tip-info">
+        			#if($!errorMessage)
+        			<ol ><li>$!errorMessage</li></ol>
+        			#elseif($!errorList)
+        				<h3>以下表单项填写不正确，请检查：</h3>
+        				<ol>
+                			#foreach($!error in $!errorList)
+                				<li>$!error</li>
+                			#end
+        				</ol>
+					#end
+				  </div>
+	  #end	
+ </div>

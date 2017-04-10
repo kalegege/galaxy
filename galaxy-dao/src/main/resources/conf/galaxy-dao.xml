@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<bean class="com.wasu.ptyw.galaxy.dal.persist.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappers">
+			<list>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyUserDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyOrderFilmDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyHistoryDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.SysSettingDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyDiscountDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyWeixinFollowDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyFilmDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyDiscountAccessDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.GalaxyFilmSectionDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.ChanelTeamDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.ChanelItemDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.ChanelItemTeamDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.ChanelTeamRecommendDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.ChanelTeamSelfcontrolDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.ChanelActorDAO</value>
+				<value>com.wasu.ptyw.galaxy.dal.dao.ChanelCareActorDAO</value>
+			</list>
+		</property>
+		<property name="typeAliasesPackage" value="com.wasu.ptyw.galaxy.dal" />
+	</bean>
+</beans>

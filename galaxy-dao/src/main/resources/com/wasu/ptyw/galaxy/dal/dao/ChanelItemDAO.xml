@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.ChanelItemDAO">
+    <resultMap type="ChanelItemDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="ch_id" property="chId" javaType="java.lang.String" />
+		<result column="ch_no" property="chNo" javaType="java.lang.Integer" />
+		<result column="ch_name" property="chName" javaType="java.lang.String" />
+		<result column="byname" property="byname" javaType="java.lang.String" />
+		<result column="region_id" property="regionId" javaType="java.lang.String" />
+		<result column="assetId" property="assetid" javaType="java.lang.String" />
+		<result column="folder" property="folder" javaType="java.lang.String" />
+		<result column="is_playback" property="isPlayback" javaType="java.lang.Integer" />
+		<result column="is_boardcast" property="isBoardcast" javaType="java.lang.Integer" />
+		<result column="isHdCh" property="ishdch" javaType="java.lang.Integer" />
+		<result column="type" property="type" javaType="java.lang.Integer" />
+		<result column="chType" property="chtype" javaType="java.lang.Integer" />
+		<result column="playURL" property="playurl" javaType="java.lang.String" />
+		<result column="chLogoURL" property="chlogourl" javaType="java.lang.String" />
+		<result column="chLogo_name" property="chlogoName" javaType="java.lang.String" />
+		<result column="desc" property="desc" javaType="java.lang.String" />
+		<result column="hdChId" property="hdchid" javaType="java.lang.String" />
+		<result column="freq" property="freq" javaType="java.lang.String" />
+		<result column="mod" property="mod" javaType="java.lang.String" />
+		<result column="rate" property="rate" javaType="java.lang.String" />
+		<result column="sid" property="sid" javaType="java.lang.String" />
+		<result column="casid" property="casid" javaType="java.lang.String" />
+		<result column="capid" property="capid" javaType="java.lang.String" />
+		<result column="gmt_create" property="gmtCreate" javaType="java.util.Date" />
+		<result column="gmt_modified" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	ch_id,	ch_no,	ch_name,byname,region_id,	assetId,	folder,	is_playback,	is_boardcast,	isHdCh,	type,chType,	playURL,	chLogoURL,	chLogo_name,	'desc',	hdChId,	freq,	'mod',	rate,	sid,	casid,	capid,	gmt_create,	gmt_modified
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="chId != null">
+		        and ch_id = #{chId} 
+		    </if> 
+		    <if test="chNo != null">
+		        and ch_no = #{chNo} 
+		    </if> 
+		    <if test="chName != null">
+		        and ch_name = #{chName} 
+		    </if>
+		    <if test="byname != null">
+		        and byname = #{byname} 
+		    </if>  
+		    <if test="regionId != null">
+		        and region_id = #{regionId} 
+		    </if> 
+		    <if test="assetid != null">
+		        and assetId = #{assetid} 
+		    </if> 
+		    <if test="folder != null">
+		        and folder = #{folder} 
+		    </if> 
+		    <if test="isPlayback != null">
+		        and is_playback = #{isPlayback} 
+		    </if> 
+		    <if test="isBoardcast != null">
+		        and is_boardcast = #{isBoardcast} 
+		    </if> 
+		    <if test="ishdch != null">
+		        and isHdCh = #{ishdch} 
+		    </if> 
+		    <if test="type != null">
+		        and type = #{type} 
+		    </if> 
+		    <if test="chtype != null">
+		        and chType = #{chtype} 
+		    </if> 
+		    <if test="playurl != null">
+		        and playURL = #{playurl} 
+		    </if> 
+		    <if test="chlogourl != null">
+		        and chLogoURL = #{chlogourl} 
+		    </if> 
+		    <if test="chlogoName != null">
+		        and chLogo_name = #{chlogoName} 
+		    </if> 
+		    <if test="desc != null">
+		        and `desc` = #{desc} 
+		    </if> 
+		    <if test="hdchid != null">
+		        and hdChId = #{hdchid} 
+		    </if> 
+		    <if test="freq != null">
+		        and freq = #{freq} 
+		    </if> 
+		    <if test="mod != null">
+		        and `mod` = #{mod} 
+		    </if> 
+		    <if test="rate != null">
+		        and rate = #{rate} 
+		    </if> 
+		    <if test="sid != null">
+		        and sid = #{sid} 
+		    </if> 
+		    <if test="casid != null">
+		        and casid = #{casid} 
+		    </if> 
+		    <if test="capid != null">
+		        and capid = #{capid} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="ChanelItemDO" useGeneratedKeys="true" keyProperty="id">
+        insert into chanel_item (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="chId != null">
+		   ch_id,
+		</if>
+		<if test="chNo != null">
+		   ch_no,
+		</if>
+		<if test="chName != null">
+		   ch_name,
+		</if>
+		<if test="byname != null">
+		   byname,
+		</if>
+		<if test="regionId != null">
+		   region_id,
+		</if>
+		<if test="assetid != null">
+		   assetId,
+		</if>
+		<if test="folder != null">
+		   folder,
+		</if>
+		<if test="isPlayback != null">
+		   is_playback,
+		</if>
+		<if test="isBoardcast != null">
+		   is_boardcast,
+		</if>
+		<if test="ishdch != null">
+		   isHdCh,
+		</if>
+		<if test="type != null">
+		   type,
+		</if>
+		<if test="chtype != null">
+		   chType,
+		</if>
+		<if test="playurl != null">
+		   playURL,
+		</if>
+		<if test="chlogourl != null">
+		   chLogoURL,
+		</if>
+		<if test="chlogoName != null">
+		   chLogo_name,
+		</if>
+		<if test="desc != null">
+		   `desc`,
+		</if>
+		<if test="hdchid != null">
+		   hdChId,
+		</if>
+		<if test="freq != null">
+		   freq,
+		</if>
+		<if test="mod != null">
+		   `mod`,
+		</if>
+		<if test="rate != null">
+		   rate,
+		</if>
+		<if test="sid != null">
+		   sid,
+		</if>
+		<if test="casid != null">
+		   casid,
+		</if>
+		<if test="capid != null">
+		   capid,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="chId != null">
+	       #{chId},
+	    </if>
+		<if test="chNo != null">
+	       #{chNo},
+	    </if>
+		<if test="chName != null">
+	       #{chName},
+	    </if>
+	    <if test="byname != null">
+	       #{byname},
+	    </if>
+		<if test="regionId != null">
+	       #{regionId},
+	    </if>
+		<if test="assetid != null">
+	       #{assetid},
+	    </if>
+		<if test="folder != null">
+	       #{folder},
+	    </if>
+		<if test="isPlayback != null">
+	       #{isPlayback},
+	    </if>
+		<if test="isBoardcast != null">
+	       #{isBoardcast},
+	    </if>
+		<if test="ishdch != null">
+	       #{ishdch},
+	    </if>
+		<if test="type != null">
+	       #{type},
+	    </if>
+		<if test="chtype != null">
+	       #{chtype},
+	    </if>
+		<if test="playurl != null">
+	       #{playurl},
+	    </if>
+		<if test="chlogourl != null">
+	       #{chlogourl},
+	    </if>
+		<if test="chlogoName != null">
+	       #{chlogoName},
+	    </if>
+		<if test="desc != null">
+	       #{desc},
+	    </if>
+		<if test="hdchid != null">
+	       #{hdchid},
+	    </if>
+		<if test="freq != null">
+	       #{freq},
+	    </if>
+		<if test="mod != null">
+	       #{mod},
+	    </if>
+		<if test="rate != null">
+	       #{rate},
+	    </if>
+		<if test="sid != null">
+	       #{sid},
+	    </if>
+		<if test="casid != null">
+	       #{casid},
+	    </if>
+		<if test="capid != null">
+	       #{capid},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="ChanelItemDO">
+        update chanel_item
+        <trim prefix="set">
+		    <if test="chId != null">
+		        ch_id = #{chId},
+		    </if> 
+		    <if test="chNo != null">
+		        ch_no = #{chNo},
+		    </if> 
+		    <if test="chName != null">
+		        ch_name = #{chName},
+		    </if> 
+		    <if test="byname != null">
+		        byname = #{byname},
+		    </if> 
+		    <if test="regionId != null">
+		        region_id = #{regionId},
+		    </if> 
+		    <if test="assetid != null">
+		        assetId = #{assetid},
+		    </if> 
+		    <if test="folder != null">
+		        folder = #{folder},
+		    </if> 
+		    <if test="isPlayback != null">
+		        is_playback = #{isPlayback},
+		    </if> 
+		    <if test="isBoardcast != null">
+		        is_boardcast = #{isBoardcast},
+		    </if> 
+		    <if test="ishdch != null">
+		        isHdCh = #{ishdch},
+		    </if> 
+		    <if test="type != null">
+		        type = #{type},
+		    </if> 
+		    <if test="chtype != null">
+		        chType = #{chtype},
+		    </if> 
+		    <if test="playurl != null">
+		        playURL = #{playurl},
+		    </if> 
+		    <if test="chlogourl != null">
+		        chLogoURL = #{chlogourl},
+		    </if> 
+		    <if test="chlogoName != null">
+		        chLogo_name = #{chlogoName},
+		    </if> 
+		    <if test="desc != null">
+		        `desc` = #{desc},
+		    </if> 
+		    <if test="hdchid != null">
+		        hdChId = #{hdchid},
+		    </if> 
+		    <if test="freq != null">
+		        freq = #{freq},
+		    </if> 
+		    <if test="mod != null">
+		        `mod` = #{mod},
+		    </if> 
+		    <if test="rate != null">
+		        rate = #{rate},
+		    </if> 
+		    <if test="sid != null">
+		        sid = #{sid},
+		    </if> 
+		    <if test="casid != null">
+		        casid = #{casid},
+		    </if> 
+		    <if test="capid != null">
+		        capid = #{capid},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from chanel_item
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_item
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_item
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select> 
+    
+    <select id="queryByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_item
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	  	<if test="chName != null">
+			AND ch_name LIKE '%${chName}%'
+		</if>
+		limit #{pageFirstItem,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+    </select>  
+    
+    <select id="queryOrder" resultMap="BaseResultMap"  parameterType="java.util.Map">
+        select *  from chanel_item
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list1" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	  	ORDER BY FIND_IN_SET(id,#{rule,jdbcType=INTEGER})	
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="ChanelItemQuery">
+		select count(*) from chanel_item
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="ChanelItemQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_item
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+    <select id="queryRePlay" resultMap="BaseResultMap" parameterType="ChanelItemQuery">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item where ch_id = #{chId} and is_playback = 1 and region_id = #{regionId}
+	</select>
+	<update id="init" parameterType="ChanelItemQuery">
+		update chanel_item SET  is_playback = 0 where region_id = #{regionId}
+	</update>
+	<select id="initCount" resultType="int" parameterType="ChanelItemQuery">
+		select count(*) from chanel_item where region_id = #{regionId}
+	</select>
+	
+	<select id="queryByRegionId" resultMap="BaseResultMap" parameterType="ChanelItemQuery">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		WHERE region_id = #{regionId}
+		<if test="orderBy != null">
+			order by ${orderBy}
+		</if>
+	</select>
+	
+	<select id="queryByRegionId1" resultMap="BaseResultMap" parameterType="ChanelItemQuery">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		WHERE region_id = #{regionId}
+		order by id
+	</select>
+
+	<select id="queryByChid" resultMap="BaseResultMap" parameterType="ChanelItemQuery">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		WHERE ch_id = #{chId}
+	</select>
+	<select id="queryByChid1" resultMap="BaseResultMap" parameterType="ChanelItemQuery">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		WHERE ch_id = #{chId}
+	</select>
+	<select id="queryadd" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		WHERE id NOT IN
+		<foreach item="items" index="index" collection="list" open="("
+			separator="," close=")">
+			#{items}
+		</foreach>
+		<if test="chName != null">
+			AND ch_name LIKE '%${chName}%'
+		</if>
+		limit #{pageFirstItem,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</select>
+		<select id="queryrecommend" resultMap="BaseResultMap" parameterType="ChanelItemQuery">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		WHERE region_id = #{regionId} 
+		<if test="chName != null">
+			AND ch_name LIKE '%${chName}%'
+		</if>
+		limit #{pageFirstItem,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</select>
+	<select id="queryAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		<trim prefix="where" prefixOverrides="and">
+			<if test="chName != null">
+				ch_name LIKE '%${chName}%'
+			</if>
+		</trim>
+		limit #{pageFirstItem,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</select>
+
+	<select id="queryaddCount" resultType="int" parameterType="java.util.Map">
+		select count(*) from chanel_item
+		WHERE id NOT IN
+		<foreach item="items" index="index" collection="list" open="("
+			separator="," close=")">
+			#{items}
+		</foreach>
+		<if test="chName != null">
+			AND ch_name LIKE '%${chName}%'
+		</if>
+	</select>
+
+	<select id="queryAllCount" resultType="int" parameterType="java.util.Map">
+		select count(*) from chanel_item
+		<if test="chName != null">
+			WHERE ch_name LIKE '%${chName}%'
+		</if>
+	</select>
+	 <select id="querydelete" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from chanel_item
+		WHERE id  IN
+		<foreach item="items" index="index" collection="list" open="("
+			separator="," close=")">
+			#{items}
+		</foreach>
+		<if test="chName != null">
+			AND ch_name LIKE '%${chName}%'
+		</if>
+		limit #{pageFirstItem,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</select>
+	
+	<select id="querydeleteCount" resultType="int"  >
+		select count(*) from chanel_item
+		WHERE id  IN
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="chName != null">
+			AND ch_name LIKE '%${chName}%'
+		</if>
+	</select>
+	
+	<select id="queryrecommendCount" resultType="int" parameterType="ChanelItemQuery">
+		select count(*) from chanel_item
+		WHERE region_id = #{regionId}
+		<if test="chName != null">
+			AND ch_name LIKE '%${chName}%'
+		</if>
+	</select>
+	<update id="updateOnly" parameterType="ChanelItemDO">
+		update chanel_item
+		<trim prefix="set">
+			<if test="chId != null">
+		        ch_id = #{chId},
+		    </if> 
+		    <if test="chNo != null">
+		        ch_no = #{chNo},
+		    </if> 
+		    <if test="chName != null">
+		        ch_name = #{chName},
+		    </if> 
+		    <if test="byname != null">
+		        and byname = #{byname} 
+		    </if> 
+		    <if test="regionId != null">
+		        region_id = #{regionId},
+		    </if> 
+		    <if test="assetid != null">
+		        assetId = #{assetid},
+		    </if> 
+		    <if test="folder != null">
+		        folder = #{folder},
+		    </if> 
+		    <if test="isPlayback != null">
+		        is_playback = #{isPlayback},
+		    </if> 
+		    <if test="isBoardcast != null">
+		        is_boardcast = #{isBoardcast},
+		    </if> 
+		    <if test="ishdch != null">
+		        isHdCh = #{ishdch},
+		    </if> 
+		    <if test="type != null">
+		        type = #{type},
+		    </if> 
+		    <if test="chtype != null">
+		        chType = #{chtype},
+		    </if> 
+		    <if test="playurl != null">
+		        playURL = #{playurl},
+		    </if> 
+		    <if test="chlogourl != null">
+		        chLogoURL = #{chlogourl},
+		    </if> 
+		    <if test="chlogoName != null">
+		        chLogo_name = #{chlogoName},
+		    </if> 
+		    <if test="desc != null">
+		        `desc` = #{desc},
+		    </if> 
+		    <if test="hdchid != null">
+		        hdChId = #{hdchid},
+		    </if> 
+		    <if test="freq != null">
+		        freq = #{freq},
+		    </if> 
+		    <if test="mod != null">
+		        `mod` = #{mod},
+		    </if> 
+		    <if test="rate != null">
+		        rate = #{rate},
+		    </if> 
+		    <if test="sid != null">
+		        sid = #{sid},
+		    </if> 
+		    <if test="casid != null">
+		        casid = #{casid},
+		    </if> 
+		    <if test="capid != null">
+		        capid = #{capid},
+		    </if> 
+			GMT_MODIFIED = now()
+		</trim>
+		WHERE ch_id = #{chId}
+		<if test="regionId != null">
+			and region_id = #{regionId}
+		</if>
+	</update>
+    
+</mapper>

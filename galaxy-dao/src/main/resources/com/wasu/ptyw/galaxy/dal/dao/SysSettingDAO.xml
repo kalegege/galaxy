@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.SysSettingDAO">
+    <resultMap type="SysSettingDO" id="BaseResultMap">
+		<result column="ID" property="id" javaType="java.lang.Long" />
+		<result column="name" property="name" javaType="java.lang.String" />
+		<result column="data" property="data" javaType="java.lang.String" />
+		<result column="remark" property="remark" javaType="java.lang.String" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	ID,	name,	data,	remark,	GMT_CREATE,	GMT_MODIFIED
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="name != null">
+		        and name = #{name} 
+		    </if> 
+		    <if test="data != null">
+		        and data = #{data} 
+		    </if> 
+		    <if test="remark != null">
+		        and remark = #{remark} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="SysSettingDO" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_setting (
+		<if test="id != null">
+		   ID,
+		</if>
+		<if test="name != null">
+		   name,
+		</if>
+		<if test="data != null">
+		   data,
+		</if>
+		<if test="remark != null">
+		   remark,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="name != null">
+	       #{name},
+	    </if>
+		<if test="data != null">
+	       #{data},
+	    </if>
+		<if test="remark != null">
+	       #{remark},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="SysSettingDO">
+        update sys_setting
+        <trim prefix="set">
+		    <if test="name != null">
+		        name = #{name},
+		    </if> 
+		    <if test="data != null">
+		        data = #{data},
+		    </if> 
+		    <if test="remark != null">
+		        remark = #{remark},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from sys_setting
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from sys_setting
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from sys_setting
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="SysSettingQuery">
+		select count(*) from sys_setting
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="SysSettingQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from sys_setting
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+    
+</mapper>

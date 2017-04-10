@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyWeixinFollowDAO">
+	<resultMap type="GalaxyWeixinFollowDO" id="BaseResultMap">
+		<result column="ID" property="id" javaType="java.lang.Long" />
+		<result column="user_id" property="userId" javaType="java.lang.Long" />
+		<result column="wx_user_name" property="wxUserName" javaType="java.lang.String" />
+		<result column="features" property="features" javaType="java.lang.String" />
+		<result column="used_status" property="usedStatus" javaType="java.lang.Integer" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, user_id, wx_user_name, features, used_status, status, GMT_CREATE,
+		GMT_MODIFIED
+	</sql>
+
+	<sql id="Base_Where_Clause">
+		WHERE id = #{id}
+	</sql>
+
+	<sql id="queryCondition">
+		<trim prefix="where" prefixOverrides="and">
+			<if test="userId != null">
+				and user_id = #{userId}
+			</if>
+			<if test="wxUserName != null">
+				and wx_user_name = #{wxUserName}
+			</if>
+			<if test="features != null">
+				and features = #{features}
+			</if>
+			<if test="usedStatus != null">
+				and used_status = #{usedStatus}
+			</if>
+			<if test="status != null">
+				and status = #{status}
+			</if>
+		</trim>
+	</sql>
+
+	<insert id="insert" parameterType="GalaxyWeixinFollowDO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into galaxy_weixin_follow (
+		<if test="id != null">
+			ID,
+		</if>
+		<if test="userId != null">
+			user_id,
+		</if>
+		<if test="wxUserName != null">
+			wx_user_name,
+		</if>
+		<if test="features != null">
+			features,
+		</if>
+		<if test="usedStatus != null">
+			used_status,
+		</if>
+		<if test="status != null">
+			status,
+		</if>
+		gmt_create, gmt_modified
+		) values (
+		<if test="id != null">
+			#{id},
+		</if>
+		<if test="userId != null">
+			#{userId},
+		</if>
+		<if test="wxUserName != null">
+			#{wxUserName},
+		</if>
+		<if test="features != null">
+			#{features},
+		</if>
+		<if test="usedStatus != null">
+			#{usedStatus},
+		</if>
+		<if test="status != null">
+			#{status},
+		</if>
+		now(), now()
+		)
+	</insert>
+
+	<update id="update" parameterType="GalaxyWeixinFollowDO">
+		update galaxy_weixin_follow
+		<trim prefix="set">
+			<if test="userId != null">
+				user_id = #{userId},
+			</if>
+			<if test="wxUserName != null">
+				wx_user_name = #{wxUserName},
+			</if>
+			<if test="features != null">
+				features = #{features},
+			</if>
+			<if test="usedStatus != null">
+				used_status = #{usedStatus},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			GMT_MODIFIED = now()
+		</trim>
+		<include refid="Base_Where_Clause" />
+	</update>
+
+	<delete id="deleteById">
+		delete from galaxy_weixin_follow
+		<include refid="Base_Where_Clause" />
+	</delete>
+
+	<select id="getById" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from galaxy_weixin_follow
+		<include refid="Base_Where_Clause" />
+	</select>
+
+	<select id="getByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from galaxy_weixin_follow
+		WHERE id IN
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="queryCount" resultType="int" parameterType="GalaxyWeixinFollowQuery">
+		select count(*) from galaxy_weixin_follow
+		<include refid="queryCondition" />
+	</select>
+
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyWeixinFollowQuery">
+		select
+		<include refid="Base_Column_List" />
+		from galaxy_weixin_follow
+		<include refid="queryCondition" />
+		<if test="orderBy != null">
+			order by ${orderBy}
+		</if>
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_weixin_follow
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+		<foreach item="item" index="index" collection="ids" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<update id="updateUsedStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_weixin_follow
+		SET used_status = #{status},gmt_modified =now()
+		WHERE id IN
+		<foreach item="item" index="index" collection="ids" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<update id="updateStatusByQuery" parameterType="java.util.Map">
+		UPDATE galaxy_weixin_follow
+		SET status = #{status},gmt_modified =now()
+		<trim prefix="where" prefixOverrides="and">
+			<if test="query.userId != null">
+				and user_id = #{query.userId}
+			</if>
+			<if test="query.wxUserName != null">
+				and wx_user_name = #{query.wxUserName}
+			</if>
+			<if test="usedStatus != null">
+				and used_status = #{query.usedStatus}
+			</if>
+			<if test="status != null">
+				and status = #{query.status}
+			</if>
+		</trim>
+	</update>
+
+</mapper>

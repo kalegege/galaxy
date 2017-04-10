@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyFilmSectionDAO">
+    <resultMap type="GalaxyFilmSectionDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="region_code" property="regionCode" javaType="java.lang.String" />
+		<result column="film_id" property="filmId" javaType="java.lang.Long" />
+		<result column="sec_id" property="secId" javaType="java.lang.Integer" />
+		<result column="status" property="status" javaType="java.lang.Integer" />
+		<result column="priority" property="priority" javaType="java.lang.Integer" />
+		<result column="gmt_create" property="gmtCreate" javaType="java.util.Date" />
+		<result column="gmt_modified" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	region_code,	film_id,	sec_id,	status,	priority,	gmt_create,	gmt_modified
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if> 
+		    <if test="filmId != null">
+		        and film_id = #{filmId} 
+		    </if> 
+		    <if test="secId != null">
+		        and sec_id = #{secId} 
+		    </if> 
+		    <if test="status != null">
+		        and status = #{status} 
+		    </if> 
+		    <if test="priority != null">
+		        and priority = #{priority} 
+		    </if> 
+		    <if test="filmIds != null">
+		        and film_id IN
+			  	<foreach item="item" index="index" collection="filmIds" open="(" separator="," close=")">
+			        #{item}
+			  	</foreach>
+		    </if>
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="GalaxyFilmSectionDO" useGeneratedKeys="true" keyProperty="id">
+        insert into galaxy_film_section (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="regionCode != null">
+		   region_code,
+		</if>
+		<if test="filmId != null">
+		   film_id,
+		</if>
+		<if test="secId != null">
+		   sec_id,
+		</if>
+		<if test="status != null">
+		   status,
+		</if>
+		<if test="priority != null">
+		   priority,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="regionCode != null">
+	       #{regionCode},
+	    </if>
+		<if test="filmId != null">
+	       #{filmId},
+	    </if>
+		<if test="secId != null">
+	       #{secId},
+	    </if>
+		<if test="status != null">
+	       #{status},
+	    </if>
+		<if test="priority != null">
+	       #{priority},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="GalaxyFilmSectionDO">
+        update galaxy_film_section
+        <trim prefix="set">
+		    <if test="regionCode != null">
+		        region_code = #{regionCode},
+		    </if> 
+		    <if test="filmId != null">
+		        film_id = #{filmId},
+		    </if> 
+		    <if test="secId != null">
+		        sec_id = #{secId},
+		    </if> 
+		    <if test="status != null">
+		        status = #{status},
+		    </if> 
+		    <if test="priority != null">
+		        priority = #{priority},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from galaxy_film_section
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_film_section
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_film_section
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="GalaxyFilmSectionQuery">
+		select count(*) from galaxy_film_section
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyFilmSectionQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from galaxy_film_section
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE galaxy_film_section 
+		SET status = #{status},gmt_modified =now()
+		WHERE id IN
+	  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+	</update>
+	
+	<delete id="deleteByQuery" parameterType="GalaxyFilmSectionQuery">
+        delete from galaxy_film_section
+        <include refid="queryCondition" />
+    </delete>
+	
+</mapper>

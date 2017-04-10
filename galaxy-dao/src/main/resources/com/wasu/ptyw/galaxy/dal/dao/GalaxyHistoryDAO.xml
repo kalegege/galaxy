@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.GalaxyHistoryDAO">
+    <resultMap type="GalaxyHistoryDO" id="BaseResultMap">
+		<result column="ID" property="id" javaType="java.lang.Long" />
+		<result column="user_id" property="userId" javaType="java.lang.Long" />
+		<result column="out_user_id" property="outUserId" javaType="java.lang.String" />
+		<result column="film_id" property="filmId" javaType="java.lang.Long" />
+		<result column="cont_code" property="contCode" javaType="java.lang.String" />
+		<result column="cont_name" property="contName" javaType="java.lang.String" />
+		<result column="cont_image" property="contImage" javaType="java.lang.String" />
+		<result column="region_code" property="regionCode" javaType="java.lang.String" />
+		<result column="play_time" property="playTime" javaType="java.lang.Integer" />
+		<result column="expired_date" property="expiredDate" javaType="java.util.Date" />
+		<result column="GMT_CREATE" property="gmtCreate" javaType="java.util.Date" />
+		<result column="GMT_MODIFIED" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	ID,	user_id,	out_user_id,	film_id,	cont_code,	cont_name,	cont_image,	region_code,	play_time,	expired_date,	GMT_CREATE,	GMT_MODIFIED
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="userId != null">
+		        and user_id = #{userId} 
+		    </if> 
+		    <if test="outUserId != null">
+		        and out_user_id = #{outUserId} 
+		    </if> 
+		    <if test="filmId != null">
+		        and film_id = #{filmId} 
+		    </if> 
+		    <if test="contCode != null">
+		        and cont_code = #{contCode} 
+		    </if> 
+		    <if test="contName != null">
+		        and cont_name = #{contName} 
+		    </if> 
+		    <if test="contImage != null">
+		        and cont_image = #{contImage} 
+		    </if> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if> 
+		    <if test="playTime != null">
+		        and play_time = #{playTime} 
+		    </if> 
+		    <if test="expiredDate != null">
+		        and expired_date = #{expiredDate} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="GalaxyHistoryDO" useGeneratedKeys="true" keyProperty="id">
+        insert into galaxy_history (
+		<if test="id != null">
+		   ID,
+		</if>
+		<if test="userId != null">
+		   user_id,
+		</if>
+		<if test="outUserId != null">
+		   out_user_id,
+		</if>
+		<if test="filmId != null">
+		   film_id,
+		</if>
+		<if test="contCode != null">
+		   cont_code,
+		</if>
+		<if test="contName != null">
+		   cont_name,
+		</if>
+		<if test="contImage != null">
+		   cont_image,
+		</if>
+		<if test="regionCode != null">
+		   region_code,
+		</if>
+		<if test="playTime != null">
+		   play_time,
+		</if>
+		<if test="expiredDate != null">
+		   expired_date,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="userId != null">
+	       #{userId},
+	    </if>
+		<if test="outUserId != null">
+	       #{outUserId},
+	    </if>
+		<if test="filmId != null">
+	       #{filmId},
+	    </if>
+		<if test="contCode != null">
+	       #{contCode},
+	    </if>
+		<if test="contName != null">
+	       #{contName},
+	    </if>
+		<if test="contImage != null">
+	       #{contImage},
+	    </if>
+		<if test="regionCode != null">
+	       #{regionCode},
+	    </if>
+		<if test="playTime != null">
+	       #{playTime},
+	    </if>
+		<if test="expiredDate != null">
+	       #{expiredDate},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="GalaxyHistoryDO">
+        update galaxy_history
+        <trim prefix="set">
+		    <if test="userId != null">
+		        user_id = #{userId},
+		    </if> 
+		    <if test="outUserId != null">
+		        out_user_id = #{outUserId},
+		    </if> 
+		    <if test="filmId != null">
+		        film_id = #{filmId},
+		    </if> 
+		    <if test="contCode != null">
+		        cont_code = #{contCode},
+		    </if> 
+		    <if test="contName != null">
+		        cont_name = #{contName},
+		    </if> 
+		    <if test="contImage != null">
+		        cont_image = #{contImage},
+		    </if> 
+		    <if test="regionCode != null">
+		        region_code = #{regionCode},
+		    </if> 
+		    <if test="playTime != null">
+		        play_time = #{playTime},
+		    </if> 
+		    <if test="expiredDate != null">
+		        expired_date = #{expiredDate},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from galaxy_history
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_history
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from galaxy_history
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="GalaxyHistoryQuery">
+		select count(*) from galaxy_history
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="GalaxyHistoryQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from galaxy_history
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    
+	<delete id="deleteByQuery" parameterType="GalaxyHistoryQuery">
+        delete from galaxy_history
+        <trim prefix="where" prefixOverrides="and"> 
+		    <if test="userId != null">
+		        and user_id = #{userId} 
+		    </if> 
+		    <if test="outUserId != null">
+		        and out_user_id = #{outUserId} 
+		    </if> 
+		    <if test="regionCode != null">
+		        and region_code = #{regionCode} 
+		    </if>
+		</trim>
+    </delete>
+    
+</mapper>

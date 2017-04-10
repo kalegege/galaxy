@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.ptyw.galaxy.dal.dao.ChanelTeamRecommendDAO">
+    <resultMap type="ChanelTeamRecommendDO" id="BaseResultMap">
+		<result column="id" property="id" javaType="java.lang.Long" />
+		<result column="ch_team" property="chTeam" javaType="java.lang.String" />
+		<result column="ch_id" property="chId" javaType="java.lang.String" />
+		<result column="ch_name" property="chName" javaType="java.lang.String" />
+		<result column="name" property="name" javaType="java.lang.String" />
+		<result column="start_date" property="startDate" javaType="java.lang.String" />
+		<result column="start_time" property="startTime" javaType="java.lang.String" />
+		<result column="stop_date" property="stopDate" javaType="java.lang.String" />
+		<result column="stop_time" property="stopTime" javaType="java.lang.String" />
+		<result column="alias_name" property="aliasName" javaType="java.lang.String" />
+		<result column="picture" property="picture" javaType="java.lang.String" />
+		<result column="picture_name" property="pictureName" javaType="java.lang.String" />
+		<result column="b_status" property="bStatus" javaType="java.lang.Integer" />
+		<result column="b_name" property="bName" javaType="java.lang.String" />
+		<result column="b_date" property="bDate" javaType="java.lang.String" />
+		<result column="b_time" property="bTime" javaType="java.lang.String" />
+		<result column="b_alias_name" property="bAliasName" javaType="java.lang.String" />
+		<result column="b_vod_name" property="bVodName" javaType="java.lang.String" />
+		<result column="b_url" property="bUrl" javaType="java.lang.String" />
+		<result column="b_folder" property="bFolder" javaType="java.lang.String" />
+		<result column="b_assertid" property="bAssertid" javaType="java.lang.String" />
+		<result column="a_status" property="aStatus" javaType="java.lang.Integer" />
+		<result column="a_name" property="aName" javaType="java.lang.String" />
+		<result column="a_date" property="aDate" javaType="java.lang.String" />
+		<result column="a_time" property="aTime" javaType="java.lang.String" />
+		<result column="a_alias_name" property="aAliasName" javaType="java.lang.String" />
+		<result column="a_vod_name" property="aVodName" javaType="java.lang.String" />
+		<result column="a_url" property="aUrl" javaType="java.lang.String" />
+		<result column="a_folder" property="aFolder" javaType="java.lang.String" />
+		<result column="a_assertid" property="aAssertid" javaType="java.lang.String" />
+		<result column="region_id" property="regionId" javaType="java.lang.String" />
+		<result column="gmt_create" property="gmtCreate" javaType="java.util.Date" />
+		<result column="gmt_modified" property="gmtModified" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+	id,	ch_team,	ch_id,	ch_name,	name,	start_date,	start_time,	stop_date,	stop_time,	alias_name,	picture,	picture_name,	b_status,	b_name,	b_date,	b_time,	b_alias_name,	b_vod_name,	b_url,	b_folder,	b_assertid,	a_status,	a_name,	a_date,	a_time,	a_alias_name,	a_vod_name,	a_url,	a_folder,	a_assertid,	region_id,	gmt_create,	gmt_modified
+    </sql>
+    
+    <sql id="Base_Where_Clause">
+        WHERE id = #{id}
+    </sql>
+    
+    <sql id="queryCondition">    	
+		<trim prefix="where" prefixOverrides="and"> 
+		    <if test="chTeam != null">
+		        and ch_team = #{chTeam} 
+		    </if> 
+		    <if test="chId != null">
+		        and ch_id = #{chId} 
+		    </if> 
+		    <if test="chName != null">
+		        and ch_name = #{chName} 
+		    </if> 
+		    <if test="name != null">
+		        and name = #{name} 
+		    </if> 
+		    <if test="startDate != null">
+		        and start_date = #{startDate} 
+		    </if> 
+		    <if test="startTime != null">
+		        and start_time = #{startTime} 
+		    </if> 
+		    <if test="stopDate != null">
+		        and stop_date = #{stopDate} 
+		    </if> 
+		    <if test="stopTime != null">
+		        and stop_time = #{stopTime} 
+		    </if> 
+		    <if test="aliasName != null">
+		        and alias_name = #{aliasName} 
+		    </if> 
+		    <if test="picture != null">
+		        and picture = #{picture} 
+		    </if> 
+		    <if test="pictureName != null">
+		        and picture_name = #{pictureName} 
+		    </if> 
+		    <if test="bStatus != null">
+		        and b_status = #{bStatus} 
+		    </if> 
+		    <if test="bName != null">
+		        and b_name = #{bName} 
+		    </if> 
+		    <if test="bDate != null">
+		        and b_date = #{bDate} 
+		    </if> 
+		    <if test="bTime != null">
+		        and b_time = #{bTime} 
+		    </if> 
+		    <if test="bAliasName != null">
+		        and b_alias_name = #{bAliasName} 
+		    </if> 
+		    <if test="bVodName != null">
+		        and b_vod_name = #{bVodName} 
+		    </if> 
+		    <if test="bUrl != null">
+		        and b_url = #{bUrl} 
+		    </if> 
+		    <if test="bFolder != null">
+		        and b_folder = #{bFolder} 
+		    </if> 
+		    <if test="bAssertid != null">
+		        and b_assertid = #{bAssertid} 
+		    </if> 
+		    <if test="aStatus != null">
+		        and a_status = #{aStatus} 
+		    </if> 
+		    <if test="aName != null">
+		        and a_name = #{aName} 
+		    </if> 
+		    <if test="aDate != null">
+		        and a_date = #{aDate} 
+		    </if> 
+		    <if test="aTime != null">
+		        and a_time = #{aTime} 
+		    </if> 
+		    <if test="aAliasName != null">
+		        and a_alias_name = #{aAliasName} 
+		    </if> 
+		    <if test="aVodName != null">
+		        and a_vod_name = #{aVodName} 
+		    </if> 
+		    <if test="aUrl != null">
+		        and a_url = #{aUrl} 
+		    </if> 
+		    <if test="aFolder != null">
+		        and a_folder = #{aFolder} 
+		    </if> 
+		    <if test="aAssertid != null">
+		        and a_assertid = #{aAssertid} 
+		    </if> 
+		    <if test="regionId != null">
+		        and region_id = #{regionId} 
+		    </if> 
+		</trim>
+	</sql>
+	
+    <insert id="insert" parameterType="ChanelTeamRecommendDO" useGeneratedKeys="true" keyProperty="id">
+        insert into chanel_team_recommend (
+		<if test="id != null">
+		   id,
+		</if>
+		<if test="chTeam != null">
+		   ch_team,
+		</if>
+		<if test="chId != null">
+		   ch_id,
+		</if>
+		<if test="chName != null">
+		   ch_name,
+		</if>
+		<if test="name != null">
+		   name,
+		</if>
+		<if test="startDate != null">
+		   start_date,
+		</if>
+		<if test="startTime != null">
+		   start_time,
+		</if>
+		<if test="stopDate != null">
+		   stop_date,
+		</if>
+		<if test="stopTime != null">
+		   stop_time,
+		</if>
+		<if test="aliasName != null">
+		   alias_name,
+		</if>
+		<if test="picture != null">
+		   picture,
+		</if>
+		<if test="pictureName != null">
+		   picture_name,
+		</if>
+		<if test="bStatus != null">
+		   b_status,
+		</if>
+		<if test="bName != null">
+		   b_name,
+		</if>
+		<if test="bDate != null">
+		   b_date,
+		</if>
+		<if test="bTime != null">
+		   b_time,
+		</if>
+		<if test="bAliasName != null">
+		   b_alias_name,
+		</if>
+		<if test="bVodName != null">
+		   b_vod_name,
+		</if>
+		<if test="bUrl != null">
+		   b_url,
+		</if>
+		<if test="bFolder != null">
+		   b_folder,
+		</if>
+		<if test="bAssertid != null">
+		   b_assertid,
+		</if>
+		<if test="aStatus != null">
+		   a_status,
+		</if>
+		<if test="aName != null">
+		   a_name,
+		</if>
+		<if test="aDate != null">
+		   a_date,
+		</if>
+		<if test="aTime != null">
+		   a_time,
+		</if>
+		<if test="aAliasName != null">
+		   a_alias_name,
+		</if>
+		<if test="aVodName != null">
+		   a_vod_name,
+		</if>
+		<if test="aUrl != null">
+		   a_url,
+		</if>
+		<if test="aFolder != null">
+		   a_folder,
+		</if>
+		<if test="aAssertid != null">
+		   a_assertid,
+		</if>
+		<if test="regionId != null">
+		   region_id,
+		</if>
+		   gmt_create, gmt_modified		
+        ) values (
+		<if test="id != null">
+	       #{id},
+	    </if>
+		<if test="chTeam != null">
+	       #{chTeam},
+	    </if>
+		<if test="chId != null">
+	       #{chId},
+	    </if>
+		<if test="chName != null">
+	       #{chName},
+	    </if>
+		<if test="name != null">
+	       #{name},
+	    </if>
+		<if test="startDate != null">
+	       #{startDate},
+	    </if>
+		<if test="startTime != null">
+	       #{startTime},
+	    </if>
+		<if test="stopDate != null">
+	       #{stopDate},
+	    </if>
+		<if test="stopTime != null">
+	       #{stopTime},
+	    </if>
+		<if test="aliasName != null">
+	       #{aliasName},
+	    </if>
+		<if test="picture != null">
+	       #{picture},
+	    </if>
+		<if test="pictureName != null">
+	       #{pictureName},
+	    </if>
+		<if test="bStatus != null">
+	       #{bStatus},
+	    </if>
+		<if test="bName != null">
+	       #{bName},
+	    </if>
+		<if test="bDate != null">
+	       #{bDate},
+	    </if>
+		<if test="bTime != null">
+	       #{bTime},
+	    </if>
+		<if test="bAliasName != null">
+	       #{bAliasName},
+	    </if>
+		<if test="bVodName != null">
+	       #{bVodName},
+	    </if>
+		<if test="bUrl != null">
+	       #{bUrl},
+	    </if>
+		<if test="bFolder != null">
+	       #{bFolder},
+	    </if>
+		<if test="bAssertid != null">
+	       #{bAssertid},
+	    </if>
+		<if test="aStatus != null">
+	       #{aStatus},
+	    </if>
+		<if test="aName != null">
+	       #{aName},
+	    </if>
+		<if test="aDate != null">
+	       #{aDate},
+	    </if>
+		<if test="aTime != null">
+	       #{aTime},
+	    </if>
+		<if test="aAliasName != null">
+	       #{aAliasName},
+	    </if>
+		<if test="aVodName != null">
+	       #{aVodName},
+	    </if>
+		<if test="aUrl != null">
+	       #{aUrl},
+	    </if>
+		<if test="aFolder != null">
+	       #{aFolder},
+	    </if>
+		<if test="aAssertid != null">
+	       #{aAssertid},
+	    </if>
+		<if test="regionId != null">
+	       #{regionId},
+	    </if>
+		   now(), now()
+        )
+    </insert>
+   
+    <update id="update" parameterType="ChanelTeamRecommendDO">
+        update chanel_team_recommend
+        <trim prefix="set">
+		    <if test="chTeam != null">
+		        ch_team = #{chTeam},
+		    </if> 
+		    <if test="chId != null">
+		        ch_id = #{chId},
+		    </if> 
+		    <if test="chName != null">
+		        ch_name = #{chName},
+		    </if> 
+		    <if test="name != null">
+		        name = #{name},
+		    </if> 
+		    <if test="startDate != null">
+		        start_date = #{startDate},
+		    </if> 
+		    <if test="startTime != null">
+		        start_time = #{startTime},
+		    </if> 
+		    <if test="stopDate != null">
+		        stop_date = #{stopDate},
+		    </if> 
+		    <if test="stopTime != null">
+		        stop_time = #{stopTime},
+		    </if> 
+		    <if test="aliasName != null">
+		        alias_name = #{aliasName},
+		    </if> 
+		    <if test="picture != null">
+		        picture = #{picture},
+		    </if> 
+		    <if test="pictureName != null">
+		        picture_name = #{pictureName},
+		    </if> 
+		    <if test="bStatus != null">
+		        b_status = #{bStatus},
+		    </if> 
+		    <if test="bName != null">
+		        b_name = #{bName},
+		    </if> 
+		    <if test="bDate != null">
+		        b_date = #{bDate},
+		    </if> 
+		    <if test="bTime != null">
+		        b_time = #{bTime},
+		    </if> 
+		    <if test="bAliasName != null">
+		        b_alias_name = #{bAliasName},
+		    </if> 
+		    <if test="bVodName != null">
+		        b_vod_name = #{bVodName},
+		    </if> 
+		    <if test="bUrl != null">
+		        b_url = #{bUrl},
+		    </if> 
+		    <if test="bFolder != null">
+		        b_folder = #{bFolder},
+		    </if> 
+		    <if test="bAssertid != null">
+		        b_assertid = #{bAssertid},
+		    </if> 
+		    <if test="aStatus != null">
+		        a_status = #{aStatus},
+		    </if> 
+		    <if test="aName != null">
+		        a_name = #{aName},
+		    </if> 
+		    <if test="aDate != null">
+		        a_date = #{aDate},
+		    </if> 
+		    <if test="aTime != null">
+		        a_time = #{aTime},
+		    </if> 
+		    <if test="aAliasName != null">
+		        a_alias_name = #{aAliasName},
+		    </if> 
+		    <if test="aVodName != null">
+		        a_vod_name = #{aVodName},
+		    </if> 
+		    <if test="aUrl != null">
+		        a_url = #{aUrl},
+		    </if> 
+		    <if test="aFolder != null">
+		        a_folder = #{aFolder},
+		    </if> 
+		    <if test="aAssertid != null">
+		        a_assertid = #{aAssertid},
+		    </if> 
+		    <if test="regionId != null">
+		        region_id = #{regionId},
+		    </if> 
+			GMT_MODIFIED = now()
+        </trim>        
+        <include refid="Base_Where_Clause" />
+    </update>    
+   
+    <delete id="deleteById">
+        delete from chanel_team_recommend
+        <include refid="Base_Where_Clause" />
+    </delete>
+    
+    <select id="getById" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_team_recommend
+        <include refid="Base_Where_Clause" />
+    </select>
+    
+    <select id="getByIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from chanel_team_recommend
+        WHERE id IN
+	  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	  	</foreach>
+    </select>   
+    
+    <select id="queryCount" resultType="int" parameterType="ChanelTeamRecommendQuery">
+		select count(*) from chanel_team_recommend
+		<include refid="queryCondition" />
+	</select> 
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="ChanelTeamRecommendQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team_recommend
+			<include refid="queryCondition" />
+		<if test="orderBy != null">
+	        order by ${orderBy}	
+	    </if> 	
+		limit #{pageFirstItem}, #{pageSize}
+	</select>
+    <select id="getrecommend" resultMap="BaseResultMap" parameterType="ChanelTeamRecommendQuery">
+		select 
+        	<include refid="Base_Column_List" />
+        from chanel_team_recommend where 
+        	region_id = #{regionId} 
+        	<if test="bStatus != null">
+		        b_status = #{bStatus},
+		    </if> 
+		    <if test="aStatus != null">
+		        a_status = #{aStatus},
+		    </if> 
+	</select>
+    
+</mapper>
